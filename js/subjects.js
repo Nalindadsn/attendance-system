@@ -93,7 +93,7 @@ $(document).ready(function(){
       if(i_name != '')
       {
         $.ajax({
-          url:"includes/ajax3.php",
+          url:"includes/ajax4.php",
           method:'POST',
           data:new FormData(this),
           contentType:false,

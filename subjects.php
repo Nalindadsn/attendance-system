@@ -47,8 +47,7 @@ include('inc/header.php');
 				<tr>
 					<th>#</th>
 					<th> Name</th>	
-					<th>year</th>					
-					<th>type</th>						
+					<th>Lecturer</th>					
 					<th></th>
 					<th></th>				
 				</tr>
@@ -72,14 +71,10 @@ include('inc/header.php');
 						</div>
 								
 						<div class="form-group">
-							<label for="Name" class="control-label">year *</label>
-							<input type="number" class="form-control" id="year" name="year" placeholder="year" required>	
+							<label for="Name" class="control-label">teacher_id *</label>
+							<input type="number" class="form-control" id="teacher_id" name="teacher_id" placeholder="teacher_id" required>	
 						</div>
 								
-						<div class="form-group">
-							<label for="Name" class="control-label">type*</label>
-							<input type="text" class="form-control" id="type" name="type" placeholder="type" required>		
-						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="hidden" name="studentId" id="studentId" />
