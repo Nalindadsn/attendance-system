@@ -13,7 +13,11 @@ class Subject {
 	public function listStudents(){
 		
 		
-		$sqlQuery = "SELECT sas_classes.id AS id, sas_classes.name AS name,  sas_classes.teacher_id AS teacher_id,  sas_user.first_name AS first_name,  sas_user.last_name AS last_name FROM sas_classes INNER JOIN sas_user ON sas_classes.teacher_id = sas_user.id ";
+		$sqlQuery = "SELECT sas_classes.id AS id, sas_classes.name AS name,  sas_classes.teacher_id AS teacher_id,  sas_user.first_name AS first_name,  sas_user.last_name AS last_name,batch.name AS batch_name,batch.year AS batch_year,batch.type AS batch_type FROM sas_classes 
+		
+
+		INNER JOIN sas_user ON sas_classes.teacher_id = sas_user.id 
+		INNER JOIN batch ON sas_classes.batch_id = batch.id ";
 
 
 		if(!empty($_POST["search"]["value"])){
@@ -47,6 +51,7 @@ class Subject {
 			$rows[] = $student['id'];
 			$rows[] = $student['name'];
 			$rows[] = $student['first_name']." ".$student['last_name'];
+			$rows[] = $student['batch_name']."-".$student['batch_year']."-".$student['batch_type'];
 			$rows[] = '<button type="button" name="view" id="'.$student["id"].'" class="btn btn-info btn-xs view"><span class="glyphicon glyphicon-file" title="View"></span></button>';
 			$rows[] = '<button type="button" name="update" id="'.$student["id"].'" class="btn btn-warning btn-xs update">Edit</button>';
 

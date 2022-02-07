@@ -47,7 +47,8 @@ include('inc/header.php');
 				<tr>
 					<th>#</th>
 					<th> Name</th>	
-					<th>Lecturer</th>					
+					<th>Lecturer</th>	
+					<th>Batch</th>					
 					<th></th>
 					<th></th>				
 				</tr>
