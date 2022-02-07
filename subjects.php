@@ -25,7 +25,7 @@ include('inc/header.php');
 <script src="js/general.js"></script>
 <script src="js/subjects.js"></script>	
 <?php include('inc/container.php');?>
-<div class="container">  	
+<div class="&gt;">  	
 	<div class="row home-sections">		
 	<?php include('top_menus.php'); ?>	
 	</div> 	
