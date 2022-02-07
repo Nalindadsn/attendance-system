@@ -55,3 +55,31 @@ $(document).ready(function(){
 		return false;
 	});	
 });
+ $(document).on("change","#country", function(e){
+  e.preventDefault();
+  var item = $("#country").val();  
+    console.log(item)
+  $.ajax({
+        type: "POST",
+        url: "includes/ajax5.php",
+        dataType: "json",
+        data: "i_id="+item,
+        success: function(response)
+        {
+        	console.log(response)
+        if (response.length>0) {
+          $("#c2").html(""+response.length+"");  
+        }else{
+          $("#c2").html("No Data"); 
+        }
+        $("#c3").html('-'); 
+        $("#classid").html("<option>-- select  --</option>");
+        var stateBody = "";
+        for(var key in response)
+          {
+            stateBody += "<option value="+response[key]['id']+">"+ response[key]['name'] +"</option>";
+            $("#classid").html(stateBody);
+          }   
+        }
+    });
+ });

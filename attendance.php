@@ -1,6 +1,7 @@
 <?php
 include_once 'config/Database.php';
 include_once 'class/User.php';
+include_once 'class/Teacher.php';
 include_once 'class/Batch.php';
 
 $database = new Database();
@@ -13,7 +14,8 @@ if(!$user->loggedIn()) {
 	header("Location: index.php");
 }
 
-$teacher = new Batch($db);
+$teacher = new Teacher($db);
+$bg = new Batch($db);
 if(!$user->isAdmin()) {
 	$teacher->teacher_id = $_SESSION["userid"];
 }
@@ -52,11 +54,25 @@ display: none;
 							<div class="box-body">						
 								<div class="row">
 									<div class="col-md-4">
+
+
+
+										
 										<div class="form-group">
 											<label for="exampleInputEmail1">Class</label><small class="req"> *</small>
+		                
+                 <select id="country" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option>-- select  --</option>
+                    	<?php echo $bg->batchList(); ?>		
+                  </select>
+                     
+										</div>
+
+										<div class="form-group">
+											<label for="exampleInputEmail1">Class</label><small class="req"> <span id="c2"></span></small>
 											<select id="classid" name="classid" class="form-control" required>
 												<option value="">Select</option>
-												<?php echo $teacher->batchList(); ?>												
+												<?php echo $teacher->classList(); ?>												
 											</select>
 											<span class="text-danger"></span>
 										</div>
