@@ -5,6 +5,7 @@
 	<?php } ?> 
 	<li id="student"><a href="student.php">Students</a></li>
 	<li id="batch"><a href="batch.php">batch</a></li>
+	<li id="subjects"><a href="subjects.php">subjects</a></li>
 	<li id="attendance"><a href="attendance.php">Attendance</a></li>
 	<li id="assignments"><a href="assignments.php">Assignments</a></li>
 	<li id="payments"><a href="payments.php">payments</a></li>
