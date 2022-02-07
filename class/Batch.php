@@ -9,7 +9,22 @@ class Batch {
 	public function __construct($db){
         $this->conn = $db;
     }	    
-	
+		
+	public function batchList(){
+		$whereSql = '';
+		if($this->teacher_id) {
+			$whereSql = " WHERE role = 'teacher'";
+		}
+		$sqlQuery = "SELECT * FROM batch ";	
+		$stmt = $this->conn->prepare($sqlQuery);		
+		$stmt->execute();
+		$result = $stmt->get_result();	
+		$classHTML = '';
+		while ($class = $result->fetch_assoc()) { 
+			$classHTML .= '<option value="'.$class["id"].'">'.$class["name"].'</option>';	
+		}
+		return $classHTML;		
+	}
 	public function listStudents(){
 		
 		

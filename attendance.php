@@ -1,7 +1,7 @@
 <?php
 include_once 'config/Database.php';
 include_once 'class/User.php';
-include_once 'class/Teacher.php';
+include_once 'class/Batch.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -13,7 +13,7 @@ if(!$user->loggedIn()) {
 	header("Location: index.php");
 }
 
-$teacher = new Teacher($db);
+$teacher = new Batch($db);
 if(!$user->isAdmin()) {
 	$teacher->teacher_id = $_SESSION["userid"];
 }
@@ -56,7 +56,7 @@ display: none;
 											<label for="exampleInputEmail1">Class</label><small class="req"> *</small>
 											<select id="classid" name="classid" class="form-control" required>
 												<option value="">Select</option>
-												<?php echo $teacher->classList(); ?>												
+												<?php echo $teacher->batchList(); ?>												
 											</select>
 											<span class="text-danger"></span>
 										</div>
