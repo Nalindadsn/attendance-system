@@ -2,6 +2,7 @@
 include_once 'config/Database.php';
 include_once 'class/User.php';
 include_once 'class/Teacher.php';
+include_once 'class/Batch.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -14,6 +15,7 @@ if(!$user->loggedIn()) {
 }
 
 $teacher = new Teacher($db);
+$bg = new Batch($db);
 if(!$user->isAdmin()) {
 	$teacher->teacher_id = $_SESSION["userid"];
 }
@@ -55,8 +57,21 @@ display: none;
 							<div class="box-body">						
 								<div class="row">
 									<div class="col-md-4">
+
+
+										
 										<div class="form-group">
-											<label for="classid">Class</label><small class="req"> *</small>
+											<label for="exampleInputEmail1">Batch</label><small class="req"> *</small>
+		                
+                 <select id="country" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option>-- select  --</option>
+                    	<?php echo $bg->batchList(); ?>		
+                  </select>
+                     
+										</div>
+
+										<div class="form-group">
+											<label for="classid">Subject</label><small class="req"> *</small>
 											<select id="classid" name="classid" class="form-control" required>
 												<option value="">Select</option>
 												<?php echo $teacher->classList(); ?>											

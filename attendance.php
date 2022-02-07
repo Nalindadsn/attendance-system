@@ -59,7 +59,7 @@ display: none;
 
 										
 										<div class="form-group">
-											<label for="exampleInputEmail1">Class</label><small class="req"> *</small>
+											<label for="exampleInputEmail1">Batch</label><small class="req"> *</small>
 		                
                  <select id="country" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                     <option>-- select  --</option>
@@ -69,7 +69,7 @@ display: none;
 										</div>
 
 										<div class="form-group">
-											<label for="exampleInputEmail1">Class</label><small class="req"> <span id="c2"></span></small>
+											<label for="exampleInputEmail1">Subject</label><small class="req"> <span id="c2"></span></small>
 											<select id="classid" name="classid" class="form-control" required>
 												<option value="">Select</option>
 												<?php echo $teacher->classList(); ?>												
