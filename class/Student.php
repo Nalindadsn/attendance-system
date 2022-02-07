@@ -12,15 +12,15 @@ class Student {
 	
 	public function listStudents(){
 		
-		$sqlQuery = "SELECT s.id, s.name, s.roll_no, c.name as class_name
+		$sqlQuery = "SELECT s.id, s.name, s.roll_no, c.name as class_name,c.year AS y, c.type AS type
 		FROM ".$this->studentTable." as s 
-		LEFT JOIN ".$this->classTable." as c ON s.class = c.id ";
+		INNER JOIN batch as c ON s.class = c.id ";
 		
 		if(!empty($_POST["search"]["value"])){
 			$sqlQuery .= 'WHERE (s.id LIKE "%'.$_POST["search"]["value"].'%" ';
 			$sqlQuery .= ' OR s.name LIKE "%'.$_POST["search"]["value"].'%" ';			
 			$sqlQuery .= ' OR s.roll_no LIKE "%'.$_POST["search"]["value"].'%" ';			
-			$sqlQuery .= ' OR c.name LIKE "%'.$_POST["search"]["value"].'%") ';								
+			$sqlQuery .= ' OR s.name LIKE "%'.$_POST["search"]["value"].'%") ';								
 		}
 		
 		if(!empty($_POST["order"])){
@@ -37,7 +37,8 @@ class Student {
 		$stmt->execute();
 		$result = $stmt->get_result();	
 		
-		$stmtTotal = $this->conn->prepare("SELECT * FROM ".$this->studentTable);
+		$stmtTotal = $this->conn->prepare("SELECT * FROM ".$this->studentTable." as s 
+		INNER JOIN batch as c ON s.class = c.id" );
 		$stmtTotal->execute();
 		$allResult = $stmtTotal->get_result();
 		$allRecords = $allResult->num_rows;
@@ -46,10 +47,10 @@ class Student {
 		$records = array();		
 		while ($student = $result->fetch_assoc()) { 				
 			$rows = array();			
-			$rows[] = $student['id'];
+			$rows[] = $student['id']."--";
 			$rows[] = ucfirst($student['name']);
 			$rows[] = $student['roll_no'];		
-			$rows[] = $student['class_name'];				
+			$rows[] = $student['class_name']."-".$student['y']."-".$student['type'];				
 			$rows[] = '<button type="button" name="view" id="'.$student["id"].'" class="btn btn-info btn-xs view"><span class="glyphicon glyphicon-file" title="View"></span></button>';
 			$rows[] = '<button type="button" name="update" id="'.$student["id"].'" class="btn btn-warning btn-xs update">Edit</button>';
 			if(!empty($_SESSION["role"]) && $_SESSION["role"] == 'administrator') {

@@ -8,7 +8,7 @@ $(document).ready(function(){
 		'serverMethod': 'post',		
 		"order":[],
 		"ajax":{
-			url:"payments_action.php",
+			url:"student_action.php",
 			type:"POST",
 			data:{action:'listStudents'},
 			dataType:"json"

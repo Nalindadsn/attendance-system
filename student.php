@@ -48,7 +48,7 @@ include('inc/header.php');
 					<th>#</th>
 					<th>Name</th>					
 					<th>Roll No</th>					
-					<th>Class</th>					
+					<th>Batch</th>					
 					<th></th>
 					<th></th>
 					<th></th>					
