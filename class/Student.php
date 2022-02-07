@@ -47,7 +47,7 @@ class Student {
 		$records = array();		
 		while ($student = $result->fetch_assoc()) { 				
 			$rows = array();			
-			$rows[] = $student['id']."--";
+			$rows[] = $student['id']."";
 			$rows[] = ucfirst($student['name']);
 			$rows[] = $student['roll_no'];		
 			$rows[] = $student['class_name']."-".$student['y']."-".$student['type'];				
