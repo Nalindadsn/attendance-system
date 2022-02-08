@@ -4,12 +4,15 @@ include_once 'class/User.php';
 include_once 'class/Teacher.php';
 
 
+include_once 'class/Batch.php';
+
 $database = new Database();
 $db = $database->getConnection();
 
 $user = new User($db);
 $teacher = new Teacher($db);
 
+$bg = new Batch($db);
 if(!$user->loggedIn()) {
 	header("Location: index.php");
 }
@@ -72,6 +75,14 @@ include('inc/header.php');
 						<div class="form-group">
 							<label for="Name" class="control-label">teacher_id *</label>
 							<input type="number" class="form-control" id="teacher_id" name="teacher_id" placeholder="teacher_id" required>	
+							
+						</div>
+						<div class="form-group">
+							<label for="Name" class="control-label">batch_id *</label>
+							<select  id="batch_id" name="batch_id"  class="form-control" required>
+								<option value="">Select</option>
+								<?php echo $bg->batchList(); ?>												
+							</select>
 						</div>
 								
 					</div>
