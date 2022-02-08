@@ -52,9 +52,7 @@ include('inc/header.php');
 					<th>name</th>					
 					<th>mark</th>				
 					<th>remark</th>					
-					<th>crated at</th>					
-					<th></th>
-					<th></th>				
+					<th>crated at</th>				
 				</tr>
 			</thead>
 		</table>

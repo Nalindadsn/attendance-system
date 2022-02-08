@@ -48,9 +48,7 @@ include('inc/header.php');
 					<th>#</th>
 					<th> Name</th>	
 					<th>year</th>					
-					<th>type</th>						
-					<th></th>
-					<th></th>				
+					<th>type</th>			
 				</tr>
 			</thead>
 		</table>

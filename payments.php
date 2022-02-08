@@ -51,9 +51,7 @@ include('inc/header.php');
 					<th>invoice_No</th>					
 					<th>reson</th>					
 					<th>amount</th>					
-					<th>crated at</th>					
-					<th></th>
-					<th></th>				
+					<th>crated at</th>				
 				</tr>
 			</thead>
 		</table>
