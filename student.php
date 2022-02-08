@@ -1,14 +1,14 @@
 <?php
 include_once 'config/Database.php';
 include_once 'class/User.php';
-include_once 'class/Teacher.php';
+include_once 'class/Batch.php';
 
 
 $database = new Database();
 $db = $database->getConnection();
 
 $user = new User($db);
-$teacher = new Teacher($db);
+$bg = new Batch($db);
 
 if(!$user->loggedIn()) {
 	header("Location: index.php");
@@ -100,24 +100,24 @@ include('inc/header.php');
 							<textarea class="form-control" id="currentAddress" name="currentAddress" placeholder="Current Address"></textarea>			
 						</div>	
 
-						<div class="form-group"
+						<div class="form-group">
 							<label for="Permanent Address" class="control-label">Permanent Address</label>
 							<textarea class="form-control" id="permanentAddress" name="permanentAddress" placeholder="Permanent Address"></textarea>			
 						</div>	
 
-						<div class="form-group"
+						<div class="form-group">
 							<label for="Father Name" class="control-label">Father Name</label>
 							<input type="text" class="form-control" id="fatherName" name="fatherName" placeholder="Father Name" required>			
 						</div>
 						
-						<div class="form-group"
+						<div class="form-group">
 							<label for="Mother Name" class="control-label">Mother Name</label>
 							<input type="text" class="form-control" id="motherName" name="motherName" placeholder="Mother Name" required>			
 						</div>
 						
 						<div class="form-group">
 							<label for="Acamedmic Year" class="control-label">Acamedmic Year</label>				
-							<select id="acamedicYear" name="acamedicYear" class="form-control">
+							<select id="academicYear" name="academicYear" class="form-control">
 							<option value="2020">2020</option>
 							<option value="2021">2021</option>				
 							<option value="2022">2022</option>
@@ -128,15 +128,15 @@ include('inc/header.php');
 						</div>						
 
 						<div class="form-group">
-							<label for="class">Class</label>
+							<label for="class">Batch</label>
 							<select id="classid" name="classid" class="form-control" required>
 								<option value="">Select</option>
-								<?php echo $teacher->classList(); ?>												
+								<?php echo $bg->batchList(); ?>												
 							</select>
 							<span class="text-danger"></span>
 						</div>
 						
-						<div class="form-group"
+						<div class="form-group">
 							<label for="Roll Number" class="control-label">Roll No</label>
 							<input type="number" class="form-control" id="rollNo" name="rollNo" placeholder="Roll Number" required>			
 						</div>

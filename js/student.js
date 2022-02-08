@@ -85,23 +85,38 @@ $(document).ready(function(){
 		})
 	});	
 
-	$(document).on('submit','#studentForm', function(event){
-		event.preventDefault();
-		$('#save').attr('disabled','disabled');
-		var formData = $(this).serialize();
-		$.ajax({
-			url:"payments_action.php",
-			method:"POST",
-			data:formData,
-			success:function(data){				
+    $(document).on('submit', '#studentForm', function(event){
+      event.preventDefault();
+      var i_name = $('#name').val();
+   console.log("oop")
+      if(i_name != '')
+      {
+        $.ajax({
+          url:"includes/ajax7.php",
+          method:'POST',
+          data:new FormData(this),
+          contentType:false,
+          processData:false,
+          beforeSend:function(){
+            // $('.loader').show();
+          },
+          success:function(data)
+          {
+          	console.log(data)
+            // $('.loader').hide();
+            // $('#erm').html(""+data+"");
 				$('#studentForm')[0].reset();
 				$('#studentModal').modal('hide');				
 				$('#save').attr('disabled', false);
 				studentRecords.ajax.reload();
-			}
-		})
-	});	
-		
+          }
+        });
+      }
+      else
+      {
+        // $('#erm').html("Both Fields are Required");
+      }
+    });
 	$(document).on('click', '.delete', function(){
 		var studentId = $(this).attr("id");		
 		var action = "deleteStudent";
