@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2022 at 08:03 PM
+-- Generation Time: Feb 08, 2022 at 04:20 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -63,7 +63,9 @@ CREATE TABLE `batch` (
 
 INSERT INTO `batch` (`id`, `name`, `year`, `type`) VALUES
 (1, 'ACC', 2020, 'P'),
-(2, 'IT', 2022, 'F');
+(2, 'IT', 2022, 'F'),
+(3, 't', 3333, 'f'),
+(4, '4', 4444, 'p');
 
 -- --------------------------------------------------------
 
@@ -449,7 +451,9 @@ INSERT INTO `sas_classes` (`id`, `name`, `teacher_id`, `batch_id`) VALUES
 (35, 'Third', 1, 2),
 (38, 'Fourth', 1, 2),
 (39, 'test', 2, 1),
-(40, 'y', 2, 1);
+(40, 'y', 2, 1),
+(41, 'oop', 1, 1),
+(42, 'test', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -489,7 +493,8 @@ INSERT INTO `sas_students` (`id`, `name`, `gender`, `dob`, `photo`, `mobile`, `e
 (3, 'Smith', 'male', '2002-03-03', '1582091940bg.jpg', 4294967295, 'test@gmail.com', 'test blk tst tst tst', NULL, 'test', 0, '', 'testing', 0, 2, 2, NULL, '2020-03-15 00:00:00', 2020, 34),
 (4, 'Foster', 'Male', '2003-03-10', NULL, 0, NULL, NULL, NULL, '', 0, '', '', 0, 0, 3, NULL, '2020-03-15 00:00:00', 2020, 35),
 (5, 'Damein', 'Male', '2001-03-03', NULL, 0, NULL, NULL, NULL, '', 0, '', '', 0, 0, 4, NULL, '2020-03-15 00:00:00', 2020, 38),
-(8, 'Andy', 'male', '2021-11-14', NULL, 1234567890, 'asd@phpzag.com', 'dsdgsd', 'dsdgsd', 'dfsdf', 0, '', 'sdfsdf', 0, 0, 464634, NULL, '0000-00-00 00:00:00', 2022, 35);
+(8, 'Andy', 'male', '2021-11-14', NULL, 1234567890, 'asd@phpzag.com', 'dsdgsd', 'dsdgsd', 'dfsdf', 0, '', 'sdfsdf', 0, 0, 464634, NULL, '0000-00-00 00:00:00', 2022, 35),
+(9, 'test', 'male', '2022-02-08', NULL, 4546446, 'admin@gmail.com', 'q', 'q', 'q', 0, '', 'q', 0, 0, 3, NULL, '0000-00-00 00:00:00', 2020, 1);
 
 -- --------------------------------------------------------
 
@@ -514,7 +519,7 @@ CREATE TABLE `sas_user` (
 --
 
 INSERT INTO `sas_user` (`id`, `first_name`, `last_name`, `email`, `password`, `gender`, `mobile`, `status`, `role`) VALUES
-(1, 'Kane s', 'William', 'kw@coderszine.com', '900150983cd24fb0d6963f7d28e17f72', '', '41242142', 'active', 'teacher'),
+(1, 'Kane s', 'William', 'kw@coderszine.com', '202cb962ac59075b964b07152d234b70', '', '41242142', 'active', 'teacher'),
 (2, 'Jhony', 'Rhodes', 'jhonty@coderszine.com', '202cb962ac59075b964b07152d234b70', 'male', '41242142', 'active', 'administrator');
 
 --
@@ -577,7 +582,7 @@ ALTER TABLE `assignments`
 -- AUTO_INCREMENT for table `batch`
 --
 ALTER TABLE `batch`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -595,19 +600,19 @@ ALTER TABLE `sas_attendance`
 -- AUTO_INCREMENT for table `sas_classes`
 --
 ALTER TABLE `sas_classes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `sas_students`
 --
 ALTER TABLE `sas_students`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `sas_user`
 --
 ALTER TABLE `sas_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
