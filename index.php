@@ -31,7 +31,7 @@ include('inc/header.php');
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="js/search.js"></script>
 <?php include('inc/container.php');?>
-<div class="container">
+<div class="container-fluid">
 	<h2>Student Attendance System</h2>
 	<br>
 	
