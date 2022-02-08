@@ -60,22 +60,22 @@ include('inc/header.php');
 						<h4 class="modal-title"><i class="fa fa-plus"></i> Add User</h4>
 					</div>
 					<div class="modal-body">
-						<div class="form-group"
+						<div class="form-group">
 							<label for="firstName" class="control-label">First Name*</label>
 							<input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name" required>			
 						</div>
 						
-						<div class="form-group"
+						<div class="form-group">
 							<label for="lastName" class="control-label">Last Name*</label>
 							<input type="text" class="form-control" id="lastName" name="lastName" placeholder="last name" required>			
 						</div>
 						
-						<div class="form-group"
+						<div class="form-group">
 							<label for="username" class="control-label">Email*</label>
 							<input type="email" class="form-control" id="email" name="email" placeholder="Email" required>			
 						</div>
 						
-						<div class="form-group"
+						<div class="form-group">
 							<label for="mobile" class="control-label">Mobile*</label>
 							<input type="text" class="form-control" id="mobile" name="mobile" placeholder="mobile" required>			
 						</div>						
@@ -105,7 +105,7 @@ include('inc/header.php');
 							</select>						
 						</div>
 
-						<div class="form-group"
+						<div class="form-group">
 							<label for="username" class="control-label">New Password</label>
 							<input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Password">			
 						</div>											

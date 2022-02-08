@@ -53,22 +53,39 @@ $(document).ready(function() {
 		$('#save').val('Save');
 	});	
 		
-	$(document).on('submit','#userForm', function(event){
-		event.preventDefault();
-		$('#save').attr('disabled','disabled');
-		var formData = $(this).serialize();
-		$.ajax({
-			url:"user_action.php",
-			method:"POST",
-			data:formData,
-			success:function(data){				
+    $(document).on('submit', '#userForm', function(event){
+      event.preventDefault();
+      var i_name = $('#name').val();
+   console.log("oop")
+      if(i_name != '')
+      {
+        $.ajax({
+          url:"includes/ajax6.php",
+          method:'POST',
+          data:new FormData(this),
+          contentType:false,
+          processData:false,
+          beforeSend:function(){
+            // $('.loader').show();
+          },
+          success:function(data)
+          {
+          	console.log(data)
+            // $('.loader').hide();
+            // $('#erm').html(""+data+"");
 				$('#userForm')[0].reset();
-				$('#userModal').modal('hide');				
+				$('#studentModal').modal('hide');				
 				$('#save').attr('disabled', false);
 				userData.ajax.reload();
-			}
-		})
-	});			
+          }
+        });
+      }
+      else
+      {
+        // $('#erm').html("Both Fields are Required");
+      }
+    });
+				
 			
 	$(document).on('click', '.delete', function(){
 		var userId = $(this).attr("id");		
