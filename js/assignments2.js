@@ -8,7 +8,7 @@ $(document).ready(function(){
 		var classid = $('#classid').val();		
 		if(classid) {
 			$.ajax({
-				url:"attendance_action.php",
+				url:"assignments_action2.php",
 				method:"POST",
 				data:{classid:classid, action:"attendanceStatus"},
 				success:function(data) {					
@@ -21,7 +21,7 @@ $(document).ready(function(){
 				"serverSide":true,
 				"order":[],
 				"ajax":{
-					url:"attendance_action.php",
+					url:"assignments_action2.php",
 					type:"POST",				
 					data:{classid:classid, action:'getStudents'},
 					dataType:"json"
@@ -48,7 +48,7 @@ $(document).ready(function(){
 	$("#attendanceForm").submit(function(e) {		
 		var formData = $(this).serialize();
 		$.ajax({
-			url:"attendance_action.php",
+			url:"assignments_action2.php",
 			method:"POST",
 			data:formData,
 			success:function(data){				
@@ -78,12 +78,9 @@ $(document).ready(function(){
         }else{
           $("#c2").html("No Data"); 
         }
-        // $("#att_classid").val();
-        
         $("#c3").html('-'); 
-        var stateBody = "";
-
           stateBody += "<option>-- select  --</option>";
+        var stateBody = "";
         for(var key in response)
           {
             stateBody += "<option value="+response[key]['id']+">"+ response[key]['name'] +"</option>";

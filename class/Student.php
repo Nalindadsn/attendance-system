@@ -254,6 +254,55 @@ class Student {
 		}	
 	}
 	
+	public function updateMarks(){	
+		$attendanceYear = date('Y'); 
+		$attendanceMonth = date('m'); 
+		$attendanceDay = date('d'); 
+		$attendanceDate = $attendanceYear."/".$attendanceMonth."/".$attendanceDay;	
+		
+		$sqlQuery = "SELECT * FROM ".$this->attendanceTable." 
+			WHERE class_id = '".$_POST["att_classid"]."' AND attendance_date = '".$attendanceDate."'";			
+		
+		$stmt = $this->conn->prepare($sqlQuery);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$attendanceDone = $result->num_rows;		
+		
+		if($attendanceDone) {
+			foreach($_POST as $key => $value) {				
+				if (strpos($key, "attendencetype_") !== false) {
+					$student_id = str_replace("attendencetype_","", $key);
+					$attendanceStatus = $value;					
+					if($student_id) {
+						$updateQuery = "UPDATE sas_attendance_b SET status = '".$attendanceStatus."'
+						WHERE student_id = '".$student_id."' AND class_id = '".$_POST["att_classid"]."' AND attendance_date = '".$attendanceDate."'";						
+						
+						$stmt = $this->conn->prepare($updateQuery);							
+						$stmt->execute();
+						
+					}
+				}				
+			}	
+			echo "Marks updated successfully!";			
+		} else {
+			foreach($_POST as $key => $value) {				
+				if (strpos($key, "attendencetype_") !== false) {
+					$student_id = str_replace("attendencetype_","", $key);
+					$attendanceStatus = $value;					
+					if($student_id) {
+						$insertQuery = "INSERT INTO sas_attendance_b (student_id, class_id, status, attendance_date) 
+						VALUES ('".$student_id."', '".$_POST["att_classid"]."', '".$attendanceStatus."', '".$attendanceDate."')";
+						
+						$stmt = $this->conn->prepare($insertQuery);							
+						$stmt->execute();
+					}
+				}
+				
+			}
+			echo "Marks save successfully!";
+		}	
+	}
+	
 	public function getStudentsAttendance(){		
 		if($this->classId && $this->attendanceDate) {
 			$sqlQuery = "SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address, s.father_name, s.mother_name,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
