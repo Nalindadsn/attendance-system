@@ -5,7 +5,7 @@ $(document).ready(function(){
 		if ($.fn.DataTable.isDataTable("#studentList")) {
 			$('#studentList').DataTable().clear().destroy();
 		}
-		var classid = $('#classid').val();		
+		var classid = $('#country').val();		
 		if(classid) {
 			$.ajax({
 				url:"attendance_action.php",
@@ -36,7 +36,7 @@ $(document).ready(function(){
 			});				
 		}
 	});	
-	$("#classid").change(function() {		
+	$("#country").change(function() {		
         $('#att_classid').val($(this).val());		
     });	
 	$("#sectionid").change(function() {
@@ -78,11 +78,9 @@ $(document).ready(function(){
         }else{
           $("#c2").html("No Data"); 
         }
-        // $("#att_classid").val();
         
         $("#c3").html('-'); 
         var stateBody = "";
-
           stateBody += "<option>-- select  --</option>";
         for(var key in response)
           {
