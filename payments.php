@@ -79,7 +79,12 @@ include('inc/header.php');
 								
 						<div class="form-group">
 							<label for="Name" class="control-label">Reson*</label>
-							<input type="text" class="form-control" id="reson" name="reson" placeholder="Name" required>			
+							<select class="form-control" id="reson" name="reson" required>
+								<option>Semester Fee</option>
+								<option>Library Fee</option>
+								<option>Exam Fee</option>
+								<option>Other</option>
+							</select>	
 						</div>
 								
 						<div class="form-group">
@@ -127,7 +132,7 @@ include('inc/header.php');
 						<span id="class"></span>								
 					</div>	
 					<div class="form-group">
-						<label for="phone" class="control-label">Roll No:</label>							
+						<label for="phone" class="control-label">Register No:</label>							
 						<span id="roll_no"></span>					
 					</div>
 					<div class="form-group">

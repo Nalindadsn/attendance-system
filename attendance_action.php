@@ -21,6 +21,7 @@ if(!empty($_POST['action']) && $_POST['action'] == 'attendanceStatus') {
 if(!empty($_POST['action']) && $_POST['action'] == 'getStudentsAttendance') {
 	$student->classId = $_POST["classid"];
 	$student->attendanceDate = $_POST["attendanceDate"];
+	$student->attendanceDate_b = $_POST["attendanceDate_b"];
 	$student->getStudentsAttendance();
 }
 ?>

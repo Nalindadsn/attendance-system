@@ -123,7 +123,7 @@ include('inc/header.php');
 						<span id="class"></span>								
 					</div>	
 					<div class="form-group">
-						<label for="phone" class="control-label">Roll No:</label>							
+						<label for="phone" class="control-label">Register No:</label>							
 						<span id="roll_no"></span>					
 					</div>
 					<div class="form-group">

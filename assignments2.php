@@ -93,7 +93,7 @@ display: none;
 						<thead>
 							<tr>
 								<th>#</th>								
-								<th>Roll No</th>	
+								<th>Register No</th>	
 								<th>Name</th>
 								<th>Attendance</th>													
 							</tr>

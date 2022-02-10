@@ -76,7 +76,10 @@ include('inc/header.php');
 								
 						<div class="form-group">
 							<label for="Name" class="control-label">type*</label>
-							<input type="text" class="form-control" id="type" name="type" placeholder="type" required>		
+							<select class="form-control" id="type" name="type" required>
+								<option>Full Time</option>
+								<option>Part Time</option>
+							</select>	
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -116,7 +119,7 @@ include('inc/header.php');
 						<span id="class"></span>								
 					</div>	
 					<div class="form-group">
-						<label for="phone" class="control-label">Roll No:</label>							
+						<label for="phone" class="control-label">Register No:</label>							
 						<span id="roll_no"></span>					
 					</div>
 					<div class="form-group">

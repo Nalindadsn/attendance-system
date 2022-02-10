@@ -5,13 +5,13 @@ $(document).ready(function(){
 		if ($.fn.DataTable.isDataTable("#studentList")) {
 			$('#studentList').DataTable().clear().destroy();
 		}
-		var classid = $('#country').val();		
+		var classid = $('#classid').val();		
 		if(classid) {
 			$.ajax({
 				url:"attendance_action.php",
 				method:"POST",
 				data:{classid:classid, action:"attendanceStatus"},
-				success:function(data) {					
+				success:function(data) {			
 					$('#message').text(data).removeClass('hidden');	
 				}
 			})
@@ -36,7 +36,7 @@ $(document).ready(function(){
 			});				
 		}
 	});	
-	$("#country").change(function() {		
+	$("#classid").change(function() {		
         $('#att_classid').val($(this).val());		
     });	
 	$("#sectionid").change(function() {

@@ -84,6 +84,12 @@ display: none;
 											<label for="attendanceDate">Attendance Date</label><small class="req"> *</small>
 											<input type="text" name="attendanceDate" id="attendanceDate" class="form-control" placeholder="yyyy/mm/dd" />											
 										</div>
+									</div> 								
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="attendanceDate_b">Attendance End Date</label><small class="req"> *</small>
+											<input type="text" name="attendanceDate_b" id="attendanceDate_b" class="form-control" placeholder="yyyy/mm/dd" />											
+										</div>
 									</div> 										
 								</div>
 							</div>
@@ -100,7 +106,7 @@ display: none;
 						<thead>
 							<tr>
 								<th>#</th>								
-								<th>Roll No</th>	
+								<th>Register No</th>	
 								<th>Name</th>
 								<th>Attendance</th>													
 							</tr>

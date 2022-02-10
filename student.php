@@ -47,7 +47,7 @@ include('inc/header.php');
 				<tr>
 					<th>#</th>
 					<th>Name</th>					
-					<th>Roll No</th>					
+					<th>Register No</th>					
 					<th>Batch</th>					
 					<th></th>
 					<th></th>
@@ -137,7 +137,7 @@ include('inc/header.php');
 						</div>
 						
 						<div class="form-group">
-							<label for="Roll Number" class="control-label">Roll No</label>
+							<label for="Roll Number" class="control-label">Register No</label>
 							<input type="number" class="form-control" id="rollNo" name="rollNo" placeholder="Roll Number" required>			
 						</div>
 						
@@ -179,7 +179,7 @@ include('inc/header.php');
 						<span id="class"></span>								
 					</div>	
 					<div class="form-group">
-						<label for="phone" class="control-label">Roll No:</label>							
+						<label for="phone" class="control-label">Register No:</label>							
 						<span id="roll_no"></span>					
 					</div>
 					<div class="form-group">

@@ -308,7 +308,7 @@ class Student {
 			$sqlQuery = "SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address, s.father_name, s.mother_name,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
 				FROM ".$this->studentTable." as s
 				LEFT JOIN ".$this->attendanceTable." as a ON s.id = a.student_id
-				WHERE s.class = '".$this->classId."' AND a.attendance_date = '".$this->attendanceDate."'";
+				WHERE s.class = '".$this->classId."' AND (a.attendance_date BETWEEN '".$this->attendanceDate."' AND '".$this->attendanceDate_b."') ";
 			if(!empty($_POST["search"]["value"])){
 				$sqlQuery .= ' AND (s.id LIKE "%'.$_POST["search"]["value"].'%" ';
 				$sqlQuery .= ' OR s.name LIKE "%'.$_POST["search"]["value"].'%" ';

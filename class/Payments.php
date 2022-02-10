@@ -17,10 +17,6 @@ class Payments {
 
 		// $sqlQuery = "SELECT *  FROM payments ";
 
-
-
-
-		
 		if(!empty($_POST["search"]["value"])){
 			$sqlQuery .= 'WHERE (payments.invoice_No LIKE "%'.$_POST["search"]["value"].'%" ';	
 			$sqlQuery .= ' OR payments.reson LIKE "%'.$_POST["search"]["value"].'%") ';								

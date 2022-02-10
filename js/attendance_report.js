@@ -5,7 +5,9 @@ $(document).ready(function(){
 			$('#studentList').DataTable().clear().destroy();
 		}
 		var classid = $('#classid').val();		
-		var attendanceDate = $('#attendanceDate').val();		
+		var attendanceDate = $('#attendanceDate').val();	
+		var attendanceDate_b = $('#attendanceDate_b').val();		
+
 		if(classid && attendanceDate) {			
 			$('#studentList').DataTable({
 				"lengthChange": false,
@@ -15,7 +17,7 @@ $(document).ready(function(){
 				"ajax":{
 					url:"attendance_action.php",
 					type:"POST",				
-					data:{classid:classid, attendanceDate:attendanceDate, action:'getStudentsAttendance'},
+					data:{classid:classid, attendanceDate:attendanceDate, attendanceDate_b:attendanceDate_b, action:'getStudentsAttendance'},
 					dataType:"json"
 				},
 				"columnDefs":[
