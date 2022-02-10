@@ -194,7 +194,7 @@ class Studentt {
 			$allResult = $stmtTotal->get_result();
 			$attendanceDone = $allResult->num_rows;			
 			if($attendanceDone) {
-				echo "Attendance already submitted!";
+				echo " already submitted!";
 			} 
 		}
 	}
@@ -228,7 +228,7 @@ class Studentt {
 					}
 				}				
 			}	
-			echo "Attendance updated successfully!";			
+			echo " updated successfully!";			
 		} else {
 			foreach($_POST as $key => $value) {				
 				if (strpos($key, "attendencetype_") !== false) {
@@ -244,7 +244,7 @@ class Studentt {
 				}
 				
 			}
-			echo "Attendance save successfully!";
+			echo " save successfully!";
 		}	
 	}
 	

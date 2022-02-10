@@ -83,7 +83,7 @@ include('inc/header.php');
 						<div class="form-group">
 							<label for="status" class="control-label">Role</label>				
 							<select id="role" name="role" class="form-control">
-							<option value="administrator">Administrator</option>				
+							<option value="administrator">Administrator / Employee</option>				
 							<option value="teacher">Teacher</option>	
 							</select>						
 						</div>	

@@ -105,7 +105,7 @@ include('inc/header.php');
 							<textarea class="form-control" id="permanentAddress" name="permanentAddress" placeholder="Permanent Address"></textarea>			
 						</div>	
 
-						<div class="form-group">
+<!-- 						<div class="form-group">
 							<label for="Father Name" class="control-label">Father Name</label>
 							<input type="text" class="form-control" id="fatherName" name="fatherName" placeholder="Father Name" required>			
 						</div>
@@ -113,7 +113,7 @@ include('inc/header.php');
 						<div class="form-group">
 							<label for="Mother Name" class="control-label">Mother Name</label>
 							<input type="text" class="form-control" id="motherName" name="motherName" placeholder="Mother Name" required>			
-						</div>
+						</div> -->
 						
 						<div class="form-group">
 							<label for="Acamedmic Year" class="control-label">Acamedmic Year</label>				

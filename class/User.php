@@ -84,7 +84,7 @@ class User {
 			$rows[] = $user['mobile'];
 			$userRole = '';
 			if($user['role'] == 'administrator')	{
-				$userRole = '<span class="label label-danger">Admin</span>';
+				$userRole = '<span class="label label-danger">Admin/Employee</span>';
 			} else if($user['role'] == 'teacher') {
 				$userRole = '<span class="label label-warning">Teacher</span>';
 			}	

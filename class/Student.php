@@ -74,7 +74,7 @@ class Student {
 	
 	public function getStudent(){
 		if($this->id) {
-			$sqlQuery = "SELECT s.id, s.name, s.email, s.mobile, s.father_name, s.father_mobile, s.mother_name, s.mother_mobile, s.current_address, s.roll_no, c.name as class_name
+			$sqlQuery = "SELECT s.id, s.name, s.email, s.mobile, s.father_mobile, s.mother_name, s.mother_mobile, s.current_address, s.roll_no, c.name as class_name
 				FROM ".$this->studentTable." as s 
 				LEFT JOIN ".$this->classTable." as c ON s.class = c.id
 				WHERE s.id = ?";
@@ -108,7 +108,7 @@ class Student {
 				$query = " AND a.attendance_date = '".$attendanceDate."'";
 			}
 		
-			$sqlQuery = "SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address, s.father_name, s.mother_name,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status, a.attendance_date
+			$sqlQuery = "SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status, a.attendance_date
 				FROM ".$this->studentTable." as s
 				LEFT JOIN ".$this->attendanceTable." as a ON s.id = a.student_id
 				WHERE s.class = '".$this->classId."' $query ";
@@ -305,7 +305,7 @@ class Student {
 	
 	public function getStudentsAttendance(){		
 		if($this->classId && $this->attendanceDate) {
-			$sqlQuery = "SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address, s.father_name, s.mother_name,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
+			$sqlQuery = "SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
 				FROM ".$this->studentTable." as s
 				LEFT JOIN ".$this->attendanceTable." as a ON s.id = a.student_id
 				WHERE s.class = '".$this->classId."' AND (a.attendance_date BETWEEN '".$this->attendanceDate."' AND '".$this->attendanceDate_b."') ";
@@ -386,10 +386,10 @@ class Student {
 	public function insert() {      
 		if($this->name) {		              
 			$queryInsert = "
-				INSERT INTO ".$this->studentTable."(`name`, `gender`, `dob`, `mobile`, `email`, `current_address`, `permanent_address`, `father_name`, `mother_name`, `academic_year`, `class`, `roll_no`) 
-				VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";				
+				INSERT INTO ".$this->studentTable."(`name`, `gender`, `dob`, `mobile`, `email`, `current_address`, `permanent_address`, `academic_year`, `class`, `roll_no`) 
+				VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";				
 			$stmt = $this->conn->prepare($queryInsert);			
-			$stmt->bind_param("sssssssssiii", $this->name, $this->gender, $this->dob, $this->mobile, $this->email, $this->currentAddress, $this->permanentAddress, $this->fatherName, $this->motherName, $this->acamedicYear, $this->classid, $this->rollNo);	
+			$stmt->bind_param("sssssssssiii", $this->name, $this->gender, $this->dob, $this->mobile, $this->email, $this->currentAddress, $this->permanentAddress, $this->acamedicYear, $this->classid, $this->rollNo);	
 			$stmt->execute();				
 		}
 	}
@@ -398,10 +398,10 @@ class Student {
 		if($this->studentId && $this->name) { 				
 			$queryUpdate = "
 				UPDATE ".$this->studentTable." 
-				SET name = ?, gender = ?, dob = ?, mobile = ?, email = ?, current_address = ?, permanent_address = ?, father_name = ?, mother_name = ?, academic_year = ?, class = ?, roll_no = ?
+				SET name = ?, gender = ?, dob = ?, mobile = ?, email = ?, current_address = ?, permanent_address = ?, academic_year = ?, class = ?, roll_no = ?
 				WHERE id = ?";				
 			$stmt = $this->conn->prepare($queryUpdate);
-			$stmt->bind_param("sssssssssiiii", $this->name, $this->gender, $this->dob, $this->mobile, $this->email, $this->currentAddress, $this->permanentAddress, $this->fatherName, $this->motherName, $this->acamedicYear, $this->classid, $this->rollNo, $this->studentId);
+			$stmt->bind_param("sssssssssiiii", $this->name, $this->gender, $this->dob, $this->mobile, $this->email, $this->currentAddress, $this->permanentAddress, $this->acamedicYear, $this->classid, $this->rollNo, $this->studentId);
 			$stmt->execute();			
 		}
 	}

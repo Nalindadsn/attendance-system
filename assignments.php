@@ -2,17 +2,24 @@
 include_once 'config/Database.php';
 include_once 'class/User.php';
 include_once 'class/Teacher.php';
-
+include_once 'class/Batch.php';
 
 $database = new Database();
 $db = $database->getConnection();
 
 $user = new User($db);
-$teacher = new Teacher($db);
+
 
 if(!$user->loggedIn()) {
 	header("Location: index.php");
 }
+
+$teacher = new Teacher($db);
+$bg = new Batch($db);
+if(!$user->isAdmin()) {
+	$teacher->teacher_id = $_SESSION["userid"];
+}
+
 include('inc/header.php');
 ?>
 <title>Student Attendance System with PHP & MySQL</title>
@@ -22,143 +29,82 @@ include('inc/header.php');
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap.min.js"></script>		
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
+<script src="js/attendance2.js"></script>	
 <script src="js/general.js"></script>
-<script src="js/assignments.js"></script>	
+<link href="css/style.css" rel="stylesheet" type="text/css" >  
+<style>
+.dataTables_filter {
+display: none; 
+}
+</style>
 <?php include('inc/container.php');?>
-<div class="container-fluid">  	
+<div class="container-fluid">  
 	<div class="row home-sections">		
 	<?php include('top_menus.php'); ?>	
 	</div> 	
-	<div> 	
-		<div class="panel-heading">
+	<div class="content">
+		<div class="container-fluid">			
 			<div class="row">
-				<div class="col-md-10">
-					<h3 class="panel-title"></h3>
+				<div class="col-md-12">
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title"><i class="fa fa-search"></i>  Assignment</h3>
+						</div>
+						<form id="form1" action="" method="post" accept-charset="utf-8">
+							<div class="box-body">						
+								<div class="row">
+									<div class="col-md-4">
+
+
+
+										
+										<div class="form-group">
+											<label for="exampleInputEmail1">Batch</label><small class="req"> *</small>
+		                
+                 <select id="country" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option>-- select  --</option>
+                    	<?php echo $bg->batchList(); ?>		
+                  </select>
+                     
+										</div>
+
+										<div class="form-group">
+											<label for="exampleInputEmail1">Subject</label><small class="req"> <span id="c2"></span></small>
+											<select id="classid" name="classid" class="form-control" required>
+												<option value="">Select</option>
+												<?php echo $teacher->classList(); ?>												
+											</select>
+											<span class="text-danger"></span>
+										</div>
+									</div>																	
+								</div>
+							</div>
+							<div class="box-footer">
+								<button type="button" id="search" name="search" value="search" style="margin-bottom:10px;" class="btn btn-primary btn-sm  checkbox-toggle"><i class="fa fa-search"></i> Search</button> <br>
+							</div>
+						</form>
+					</div>
 				</div>
-				<?php if($user->isAdmin()) { ?>	
-				<div class="col-md-2" align="right">
-					<button type="button" name="add" id="addStudent" class="btn btn-success btn-xs">Add New</button>
-				</div>
-				<?php } ?>
 			</div>
-		</div>
-		<table id="studentListing" class="table table-bordered table-striped">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>REG No </th>	
-					<th>Student Name</th>	
-					<th>Subject</th>					
-					<th>name</th>					
-					<th>mark</th>				
-					<th>remark</th>					
-					<th>crated at</th>				
-				</tr>
-			</thead>
-		</table>
+			<div class="row">					
+				<form id="attendanceForm" method="post">					
+					<div style="color:red;margin-top:20px;" class="hidden" id="message"></div>
+					<button type="submit" id="saveAttendance" name="saveAttendance" value="Save Attendance" style="margin-bottom:10px;" class="btn btn-primary btn-sm  pull-right checkbox-toggle hidden"><i class="fa fa-save"></i> Save Attendance</button> <table id="studentList" class="table table-bordered table-striped hidden">
+						<thead>
+							<tr>
+								<th>#</th>								
+								<th>Register No</th>	
+								<th>Name</th>
+								<th>Marks</th>													
+							</tr>
+						</thead>
+					</table>
+					<input type="hidden" name="action" id="action" value="updateAttendance" />
+					<input type="hidden" name="att_classid" id="att_classid" value="" />
+					<input type="hidden" name="att_sectionid" id="att_sectionid" value="" />
+				</form>
+			</div>					
 	</div>	
-	
-	
-	<div id="studentModal" class="modal fade">
-		<div class="modal-dialog">
-			<form method="post" id="studentForm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title"><i class="fa fa-plus"></i> Add User</h4>
-					</div>
-					<div class="modal-body">								
-						<div class="form-group">
-							<label for="subject_id" class="control-label">subject_id*</label>
-							<input type="number" class="form-control" id="subject_id" name="subject_id" placeholder="subject_id" required>			
-						</div>
-						
-									
-						<div class="form-group">
-							<label for="mobile" class="control-label">student_id*</label>
-							<input type="text" class="form-control" id="student_id" name="student_id" placeholder="student_id" required>			
-						</div>		
-
-						<div class="form-group">
-							<label for="Name" class="control-label">Name*</label>
-							<input type="text" class="form-control" id="name" name="name" placeholder="Name" required>			
-						</div>
-					
-						<div class="form-group">
-							<label for="mobile" class="control-label">mark*</label>
-							<input type="text" class="form-control" id="mark" name="mark" placeholder="mark" required>			
-						</div>	
-						<div class="form-group">
-							<label for="mobile" class="control-label">remark*</label>
-							<input type="text" class="form-control" id="remark" name="remark" placeholder="remark" required>			
-						</div>		
-
-						
-					</div>
-					<div class="modal-footer">
-						<input type="hidden" name="studentId" id="studentId" />
-						<input type="hidden" name="action" id="action" value="" />
-						<input type="submit" name="save" id="save" class="btn btn-info" value="Save" />
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	
-	
-	<div id="studentDetails" class="modal fade">
-    	<div class="modal-dialog">    		
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title"><i class="fa fa-plus"></i> Student Details</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="name" class="control-label">Name:</label>
-						<span id="name"></span>	
-					</div>
-					<div class="form-group">
-						<label for="website" class="control-label">Email:</label>				
-						<span id="email"></span>							
-					</div>	   	
-					<div class="form-group">
-						<label for="industry" class="control-label">Mobile:</label>							
-						<span id="mobile"></span>								
-					</div>	
-					<div class="form-group">
-						<label for="description" class="control-label">Class:</label>							
-						<span id="class"></span>								
-					</div>	
-					<div class="form-group">
-						<label for="phone" class="control-label">Register No:</label>							
-						<span id="roll_no"></span>					
-					</div>
-					<div class="form-group">
-						<label for="address" class="control-label">Father Name:</label>							
-						<span id="fname"></span>							
-					</div>	
-					<div class="form-group">
-						<label for="address" class="control-label">Father Mobile:</label>							
-						<span id="fmobile"></span>							
-					</div>
-					<div class="form-group">
-						<label for="address" class="control-label">Mother Name:</label>							
-						<span id="mname"></span>							
-					</div>	
-					<div class="form-group">
-						<label for="address" class="control-label">Mother Mobile:</label>							
-						<span id="mmobile"></span>							
-					</div>	
-					<div class="form-group">
-						<label for="address" class="control-label">Address:</label>							
-						<span id="address"></span>							
-					</div>					
-				</div>    				
-			</div>    		
-    	</div>
-    </div>
 	
 </div>
  <?php include('inc/footer.php');?>
