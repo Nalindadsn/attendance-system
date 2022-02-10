@@ -29,7 +29,7 @@ include('inc/header.php');
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap.min.js"></script>		
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
-<script src="js/assignments2.js"></script>	
+<script src="js/attendance2.js"></script>	
 <script src="js/general.js"></script>
 <link href="css/style.css" rel="stylesheet" type="text/css" >  
 <style>
@@ -99,7 +99,7 @@ display: none;
 							</tr>
 						</thead>
 					</table>
-					<input type="hidden" name="action" id="action" value="updateMarks" />
+					<input type="hidden" name="action" id="action" value="updateAttendance" />
 					<input type="hidden" name="att_classid" id="att_classid" value="" />
 					<input type="hidden" name="att_sectionid" id="att_sectionid" value="" />
 				</form>
