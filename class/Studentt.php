@@ -401,18 +401,28 @@ $a=$this->ck($student['id'], $this->classId, $this->sId);
 		}
 	}
 
-// 	public function ck($c,$s,$e,$si){
-// //public function allDt(){
-// 			$sqlQuery = "SELECT * FROM `sas_attendance_b` WHERE  student_id='".$si."' AND class_id = '".$c."'";			
-// 			$stmt = $this->conn->prepare($sqlQuery);
-// 			$stmt->execute();
-// 			$result = $stmt->get_result();
-// 				return $result->num_rows;		
-// }
+public function ckk($cl,$v,$t){
+
+
+			$sqlQuery = "SELECT * FROM sas_attendance_b WHERE 
+			student_id='".$v."' AND class_id='".$cl."' AND assignmentNo='".$t."' ORDER BY attendance_id LIMIT 1 ";			
+			$stmt = $this->conn->prepare($sqlQuery);
+			$stmt->execute();
+			$result = $stmt->get_result();
+			if($result->num_rows > 0){
+				$user = $result->fetch_assoc();
+				return $user['status'];		
+			} else {
+				return "-";		
+			}
+
+	// return $user['status'];
+
+}
 
 	public function getStudentsAttendance_b(){		
 		if($this->classId) {
-			$sqlQuery = "SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
+			$sqlQuery = "SELECT s.id, s.name,a.class_id AS class_id, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
 				FROM ".$this->studentTable." as s
 				LEFT JOIN ".$this->attendanceTable." as a ON s.id = a.student_id
 				
@@ -452,8 +462,8 @@ $a=$this->ck($student['id'], $this->classId, $this->sId);
 				$studentRows[] = $student['id'];				
 				$studentRows[] = $student['roll_no'];
 				$studentRows[] = $student['name'];	
+				$studentRows[] = $this->ckk($student['class_id'],$student['id'],1);	
 
-				$studentRows[] = '';
 				$studentRows[] = '';
 				$studentRows[] = '';
 				$studentRows[] = '';
