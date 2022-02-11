@@ -76,6 +76,23 @@ display: none;
 											</select>
 											<span class="text-danger"></span>
 										</div>
+
+
+
+										<div class="form-group">
+											<label for="exampleInputEmail1">Assignment No</label>
+											
+											<input name="assignmentNo" class="form-control" required>
+											<span class="text-danger"></span>
+										</div>
+
+										<div class="form-group">
+											<label for="exampleInputEmail1">Remark</label>
+											
+											<input name="remark" class="form-control" required>
+											<span class="text-danger"></span>
+										</div>
+
 									</div>																	
 								</div>
 							</div>
@@ -103,6 +120,9 @@ display: none;
 					<input type="hidden" name="action" id="action" value="updateAttendance" />
 					<input type="hidden" name="att_classid" id="att_classid" value="" />
 					<input type="hidden" name="att_sectionid" id="att_sectionid" value="" />
+
+					<input type="hidden" name="att_assignmentNo" id="att_assignmentNo" value="" />
+					<input type="hidden" name="att_remark" id="att_remark" value="" />
 				</form>
 			</div>					
 	</div>	

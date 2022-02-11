@@ -241,7 +241,7 @@ $a=$this->ck($student['id'], $this->classId, $this->sId);
 			$allResult = $stmtTotal->get_result();
 			$attendanceDone = $allResult->num_rows;			
 			if($attendanceDone) {
-				echo "Attendance already submitted!";
+				echo " already submitted!";
 			} 
 		}
 	}
@@ -275,15 +275,15 @@ $a=$this->ck($student['id'], $this->classId, $this->sId);
 					}
 				}				
 			}	
-			echo "Attendance updated successfully!";			
+			echo " updated successfully!";			
 		} else {
 			foreach($_POST as $key => $value) {				
 				if (strpos($key, "attendencetype_") !== false) {
 					$student_id = str_replace("attendencetype_","", $key);
 					$attendanceStatus = $value;					
 					if($student_id) {
-						$insertQuery = "INSERT INTO ".$this->attendanceTable."(student_id, class_id, status, attendance_date) 
-						VALUES ('".$student_id."', '".$_POST["att_classid"]."', '".$attendanceStatus."', '".$attendanceDate."')";
+						$insertQuery = "INSERT INTO ".$this->attendanceTable."(student_id, class_id, status, attendance_date,assignmentNo,remark) 
+						VALUES ('".$student_id."', '".$_POST["att_classid"]."', '".$attendanceStatus."', '".$attendanceDate."', '".$_POST["assignmentNo"]."', '".$_POST["remark"]."')";
 						
 						$stmt = $this->conn->prepare($insertQuery);							
 						$stmt->execute();
@@ -291,7 +291,7 @@ $a=$this->ck($student['id'], $this->classId, $this->sId);
 				}
 				
 			}
-			echo "Attendance save successfully!";
+			echo " save successfully!";
 		}	
 	}
 	

@@ -7,13 +7,15 @@ $(document).ready(function(){
 		}
 		var classid = $('#country').val();	
 
-		var sId = $('#classid').val();		
+		var sId = $('#classid').val();	
+		var assignmentNo = $('#assignmentNo').val();	
+		var remark = $('#remark').val();		
 		console.log(sId)
 		if(classid) {
 			$.ajax({
 				url:"assignments_action.php",
 				method:"POST",
-				data:{classid:classid, sId:sId , action:"attendanceStatus"},
+				data:{classid:classid, sId:sId, assignmentNo:assignmentNo, remark:remark, action:"attendanceStatus"},
 				success:function(data) {			
 					$('#message').text(data).removeClass('hidden');	
 				}
@@ -42,6 +44,20 @@ $(document).ready(function(){
 	$("#classid").change(function() {		
         $('#att_classid').val($(this).val());		
     });	
+
+
+	$("#assignmentNo").change(function() {		
+        $('#att_assignmentNo').val($(this).val());		
+    });	
+
+
+	$("#remark").change(function() {		
+        $('#att_remark').val($(this).val());		
+    });	
+
+
+
+
 	$("#sectionid").change(function() {
 		$('#att_sectionid').val($(this).val());		
     });

@@ -121,6 +121,7 @@ public function ck($v,$cl,$ss){
 	// return $user['status'];
 
 }
+
 	public function getClassStudents(){	
 	
 
@@ -193,11 +194,7 @@ WHERE class=".$this->classId."
 				<input type="radio" id="attendencetype1_'.$student['id'].'" value="present" name="attendencetype_'.$student['id'].'" autocomplete="off" '.$checked['1'].'>
 				<label for="attendencetype_'.$student['id'].'">Present</label>
 				<input type="radio" id="attendencetype2_'.$student['id'].'" value="absent" name="attendencetype_'.$student['id'].'" autocomplete="off" '.$checked['2'].'>
-				<label for="attendencetype'.$student['id'].'">Absent</label>
-				<input type="radio" id="attendencetype3_'.$student['id'].'" value="late" name="attendencetype_'.$student['id'].'" autocomplete="off" '.$checked['3'].'>
-				<label for="attendencetype3_'.$student['id'].'"> Late </label>
-				<input type="radio" id="attendencetype4_'.$student['id'].'" value="half_day" name="attendencetype_'.$student['id'].'" autocomplete="off" '.$checked['4'].'>
-				<label for="attendencetype_'.$student['id'].'"> Half Day </label>';	
+				<label for="attendencetype'.$student['id'].'">Absent</label>';	
 
 
 
@@ -236,7 +233,7 @@ WHERE class=".$this->classId."
 			$allResult = $stmtTotal->get_result();
 			$attendanceDone = $allResult->num_rows;			
 			if($attendanceDone) {
-				echo "Attendance already submitted!";
+				echo " already submitted!";
 			} 
 		}
 	}
@@ -270,7 +267,7 @@ WHERE class=".$this->classId."
 					}
 				}				
 			}	
-			echo "Attendance updated successfully!";			
+			echo " updated successfully!";			
 		} else {
 			foreach($_POST as $key => $value) {				
 				if (strpos($key, "attendencetype_") !== false) {
@@ -286,7 +283,7 @@ WHERE class=".$this->classId."
 				}
 				
 			}
-			echo "Attendance save successfully!";
+			echo " save successfully!";
 		}	
 	}
 	
@@ -338,35 +335,49 @@ WHERE class=".$this->classId."
 			echo "Marks save successfully!";
 		}	
 	}
-	
+	public function allDt($c,$s,$e){
+//public function allDt(){
+			$sqlQuery = "SELECT DISTINCT(attendance_date) FROM `sas_attendance` WHERE class_id = '".$c."' AND (attendance_date BETWEEN '".$s."' AND '".$e."')";			
+			$stmt = $this->conn->prepare($sqlQuery);
+			$stmt->execute();
+			$result = $stmt->get_result();
+			if($result->num_rows > 0){
+				return $result->num_rows;		
+			} else {
+				return "";		
+			}
+}
+	public function present($c,$s,$e,$si){
+//public function allDt(){
+			$sqlQuery = "SELECT DISTINCT(attendance_date) FROM `sas_attendance` WHERE status='present' AND student_id='".$si."' AND class_id = '".$c."' AND (attendance_date BETWEEN '".$s."' AND '".$e."')";			
+			$stmt = $this->conn->prepare($sqlQuery);
+			$stmt->execute();
+			$result = $stmt->get_result();
+				return $result->num_rows;		
+			
+}
 	public function getStudentsAttendance(){		
 		if($this->classId) {
-			$sqlQuery = "SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
+			$sqlQuery = "SELECT COUNT(*) AS c, s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
 				FROM ".$this->studentTable." as s
 				LEFT JOIN ".$this->attendanceTable." as a ON s.id = a.student_id
+
 				WHERE a.class_id = '".$this->classId."' AND (a.attendance_date BETWEEN '".$this->attendanceDate."' AND '".$this->attendanceDate_b."') ";
-			if(!empty($_POST["search"]["value"])){
-				$sqlQuery .= ' AND (s.id LIKE "%'.$_POST["search"]["value"].'%" ';
-				$sqlQuery .= ' OR s.name LIKE "%'.$_POST["search"]["value"].'%" ';
-				$sqlQuery .= ' OR s.admission_no LIKE "%'.$_POST["search"]["value"].'%" ';	
-				$sqlQuery .= ' OR s.roll_no LIKE "%'.$_POST["search"]["value"].'%" ';	
-				$sqlQuery .= ' OR a.attendance_date LIKE "%'.$_POST["search"]["value"].'%" )';
-			}
-			if(!empty($_POST["order"])){
-				$sqlQuery .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
-			} else {
-				$sqlQuery .= 'ORDER BY s.id DESC ';
-			}
-			if($_POST["length"] != -1){
-				$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
-			}	
+			
+		
+			$sqlQuery .= "GROUP BY s.id";
+			
 			
 			
 			$stmt = $this->conn->prepare($sqlQuery);
 			$stmt->execute();
 			$result = $stmt->get_result();	
 						
-			$stmtTotal = $this->conn->prepare("SELECT * FROM ".$this->attendanceTable);
+			$stmtTotal = $this->conn->prepare("SELECT COUNT(*) AS c, s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
+				FROM ".$this->studentTable." as s
+				LEFT JOIN ".$this->attendanceTable." as a ON s.id = a.student_id
+
+				WHERE a.class_id = '".$this->classId."' AND (a.attendance_date BETWEEN '".$this->attendanceDate."' AND '".$this->attendanceDate_b."') GROUP BY s.id");
 			$stmtTotal->execute();
 			$allResult = $stmtTotal->get_result();
 			$allRecords = $allResult->num_rows;
@@ -389,7 +400,7 @@ WHERE class=".$this->classId."
 				$studentRows[] = $student['id'];				
 				$studentRows[] = $student['roll_no'];
 				$studentRows[] = $student['name'];		
-				$studentRows[] = $attendance;					
+				$studentRows[] = "<span class='prcc'>".(($this->present($this->classId,$this->attendanceDate,$this->attendanceDate_b,$student['id']))/($this->allDt($this->classId,$this->attendanceDate,$this->attendanceDate_b))*100)."%</span>";					
 				$studentData[] = $studentRows;
 			}
 			
