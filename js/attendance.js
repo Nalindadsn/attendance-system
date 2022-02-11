@@ -5,12 +5,15 @@ $(document).ready(function(){
 		if ($.fn.DataTable.isDataTable("#studentList")) {
 			$('#studentList').DataTable().clear().destroy();
 		}
-		var classid = $('#classid').val();		
+		var classid = $('#country').val();	
+
+		var sId = $('#classid').val();		
+		console.log(sId)
 		if(classid) {
 			$.ajax({
 				url:"attendance_action.php",
 				method:"POST",
-				data:{classid:classid, action:"attendanceStatus"},
+				data:{classid:classid, sId:sId , action:"attendanceStatus"},
 				success:function(data) {			
 					$('#message').text(data).removeClass('hidden');	
 				}
@@ -23,7 +26,7 @@ $(document).ready(function(){
 				"ajax":{
 					url:"attendance_action.php",
 					type:"POST",				
-					data:{classid:classid, action:'getStudents'},
+					data:{classid:classid, sId:sId, action:'getStudents'},
 					dataType:"json"
 				},
 				"columnDefs":[
@@ -47,6 +50,7 @@ $(document).ready(function(){
 
 	$("#attendanceForm").submit(function(e) {		
 		var formData = $(this).serialize();
+		console.log(formData)
 		$.ajax({
 			url:"attendance_action.php",
 			method:"POST",

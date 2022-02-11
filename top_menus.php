@@ -14,6 +14,7 @@
 	<li id="assignments"><a href="assignments.php">Assignments</a></li>
 	<li id="payments"><a href="payments.php">payments</a></li>
 	<li id="attendance_report"><a href="attendance_report.php">Attendance Report</a></li>	
+	<li id="assignment_report"><a href="assignment_report.php">Assignment Report</a></li>	
 
 
 </ul>	

@@ -87,109 +87,67 @@ class Student {
 			echo json_encode($record);
 		}
 	}
-public function ck($v,$cl,$ss){
 
-			$attendanceYear = date('Y'); 
-			$attendanceMonth = date('m'); 
-			$attendanceDay = date('d'); 
-			$attendanceDate = $attendanceYear."/".$attendanceMonth."/".$attendanceDay;	
-
-			// $sqlQueryCheck = "SELECT * FROM sas_attendance WHERE 
-			
-			// student_id='".$v."' AND attendance_date='".$attendanceDate."'  LIMIT 1";	
-				
-			// $stmtCheck = $this->conn->prepare($sqlQueryCheck);
-			// $stmtCheck->execute();
-			// $result = $stmt->get_result();
-			// 	$user = $result->fetch_assoc();
-
-			//$attendanceDone = $resultCheck->num_rows;
-
-			$sqlQuery = "SELECT * FROM sas_attendance WHERE 
-			student_id='".$v."' AND class_id='".$ss."'  AND attendance_date='".$attendanceDate."'  LIMIT 1";			
-			$stmt = $this->conn->prepare($sqlQuery);
-			$stmt->execute();
-			$result = $stmt->get_result();
-			if($result->num_rows > 0){
-				$user = $result->fetch_assoc();
-				//$vvv = $user['id'];				
-				return $user['status'];		
-			} else {
-				return "";		
-			}
-
-	// return $user['status'];
-
-}
 	public function getClassStudents(){	
 	
+		if($this->classId) {
 
-// $qur="SELECT * FROM sas_attendance WHERE "
-
-		$sqlQuery = "SELECT s.id, s.name, s.roll_no, c.name as class_name,c.year AS y, c.type AS type
-		FROM ".$this->studentTable." as s 
-		INNER JOIN batch as c ON s.class = c.id
-WHERE class=".$this->classId."  
-		 ";
 		
-		if(!empty($_POST["search"]["value"])){
-			$sqlQuery .= 'AND (s.id LIKE "%'.$_POST["search"]["value"].'%" ';
-			$sqlQuery .= ' OR s.name LIKE "%'.$_POST["search"]["value"].'%" ';			
-			$sqlQuery .= ' OR s.roll_no LIKE "%'.$_POST["search"]["value"].'%" ';			
-			$sqlQuery .= ' OR s.name LIKE "%'.$_POST["search"]["value"].'%") ';								
-		}
+			$sqlQuery = "SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status, a.attendance_date
+				FROM ".$this->studentTable." as s
+				LEFT JOIN ".$this->attendanceTable." as a ON s.id = a.student_id
+				WHERE s.class = '".$this->classId."' $query ";
+				
+			$sqlQuery .= "GROUP BY a.student_id ";	
+			if(!empty($_POST["search"]["value"])){
+				$sqlQuery .= ' AND (s.id LIKE "%'.$_POST["search"]["value"].'%" ';
+				$sqlQuery .= ' OR s.name LIKE "%'.$_POST["search"]["value"].'%" ';
+				$sqlQuery .= ' OR s.admission_no LIKE "%'.$_POST["search"]["value"].'%" ';	
+				$sqlQuery .= ' OR s.roll_no LIKE "%'.$_POST["search"]["value"].'%" )';			
+			}
+			if(!empty($_POST["order"])){
+				$sqlQuery .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+			} else {
+				$sqlQuery .= 'ORDER BY s.id DESC ';
+			}
+			if($_POST["length"] != -1){
+				$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+			}
+			
+			$stmt = $this->conn->prepare($sqlQuery);
+			$stmt->execute();
+			$result = $stmt->get_result();	
+						
+			$stmtTotal = $this->conn->prepare("SELECT * FROM ".$this->attendanceTable);
+			$stmtTotal->execute();
+			$allResult = $stmtTotal->get_result();
+			$allRecords = $allResult->num_rows;
 		
-		if(!empty($_POST["order"])){
-			$sqlQuery .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
-		} else {
-			$sqlQuery .= 'ORDER BY s.id DESC ';
-		}
-		
-		if($_POST["length"] != -1){
-			$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
-		}
-		
-		$stmt = $this->conn->prepare($sqlQuery);
-		$stmt->execute();
-		$result = $stmt->get_result();	
-
-		$stmtTotal = $this->conn->prepare("SELECT * FROM ".$this->studentTable." as s 
-		INNER JOIN batch as c ON s.class = c.id" );
-		$stmtTotal->execute();
-		$allResult = $stmtTotal->get_result();
-		$allRecords = $allResult->num_rows;
-		
-		$displayRecords = $result->num_rows;
-		$records = array();		
-		while ($student = $result->fetch_assoc()) { 	
+			$displayRecords = $result->num_rows;
+			$studentData = array();	
+			
+			while ($student = $result->fetch_assoc()) { 					
 				$checked = array();
 				$checked[1] = '';
 				$checked[2] = '';
 				$checked[3] = '';
 				$checked[4] = '';
-
-					if($this->ck($student['id'],$this->classId, $this->sId) == 'present') {
+				if($student['attendance_date'] == $attendanceDate) {
+					if($student['status'] == 'present') {
 						$checked[1] = 'checked';
-					} else if($this->ck($student['id'],$this->classId, $this->sId) == 'absent') {
+					} else if($student['status'] == 'absent') {
 						$checked[2] = 'checked';
-					} else if($this->ck($student['id'],$this->classId, $this->sId) == 'late') {
+					} else if($student['status'] == 'late') {
 						$checked[3] = 'checked';
-					} else if($this->ck($student['id'],$this->classId, $this->sId) == 'half_day') {
+					} else if($student['status'] == 'half_day') {
 						$checked[4] = 'checked';
 					}	
-
-
-
-			$rows = array();			
-			$rows[] = $student['id'];
-			$rows[] = ucfirst($student['name'])."-".$this->sId;
-			$rows[] = $this->ck($student['id'], $this->classId, $this->sId);		
-			$rows[] = $student['class_name']."-".$student['y']."-".$student['type'];
-
-
-				// $rows[]=ck();
-
-				$rows[] = '
+				}				
+				$studentRows = array();			
+				$studentRows[] = $student['id'];				
+				$studentRows[] = $student['roll_no'];
+				$studentRows[] = $student['name'];	
+				$studentRows[] = '
 				<input type="radio" id="attendencetype1_'.$student['id'].'" value="present" name="attendencetype_'.$student['id'].'" autocomplete="off" '.$checked['1'].'>
 				<label for="attendencetype_'.$student['id'].'">Present</label>
 				<input type="radio" id="attendencetype2_'.$student['id'].'" value="absent" name="attendencetype_'.$student['id'].'" autocomplete="off" '.$checked['2'].'>
@@ -197,28 +155,20 @@ WHERE class=".$this->classId."
 				<input type="radio" id="attendencetype3_'.$student['id'].'" value="late" name="attendencetype_'.$student['id'].'" autocomplete="off" '.$checked['3'].'>
 				<label for="attendencetype3_'.$student['id'].'"> Late </label>
 				<input type="radio" id="attendencetype4_'.$student['id'].'" value="half_day" name="attendencetype_'.$student['id'].'" autocomplete="off" '.$checked['4'].'>
-				<label for="attendencetype_'.$student['id'].'"> Half Day </label>';	
-
-
-
-			$rows[] = '<button type="button" name="view" id="'.$student["id"].'" class="btn btn-info btn-xs view"><span class="glyphicon glyphicon-file" title="View"></span></button>';
-			$rows[] = '<button type="button" name="update" id="'.$student["id"].'" class="btn btn-warning btn-xs update">Edit</button>';
-			if(!empty($_SESSION["role"]) && $_SESSION["role"] == 'administrator') {
-				$rows[] = '<button type="button" name="delete" id="'.$student["id"].'" class="btn btn-danger btn-xs delete">Delete</button>';
-			} else {
-				$rows[] = 'Delete';
-			}
-			$records[] = $rows;
+				<label for="attendencetype_'.$student['id'].'"> Half Day </label>';					
+				$studentData[] = $studentRows;
+			}			
+			
+			$output = array(
+				"draw"	=>	intval($_POST["draw"]),			
+				"iTotalRecords"	=> 	$displayRecords,
+				"iTotalDisplayRecords"	=>  $allRecords,
+				"data"	=> 	$studentData
+			);
+		
+			echo json_encode($output);
+			
 		}
-		
-		$output = array(
-			"draw"	=>	intval($_POST["draw"]),			
-			"iTotalRecords"	=> 	$displayRecords,
-			"iTotalDisplayRecords"	=>  $allRecords,
-			"data"	=> 	$records
-		);
-		
-		echo json_encode($output);
 	}
 	
 	
@@ -340,11 +290,11 @@ WHERE class=".$this->classId."
 	}
 	
 	public function getStudentsAttendance(){		
-		if($this->classId) {
+		if($this->classId && $this->attendanceDate && $this->attendanceDate_b) {
 			$sqlQuery = "SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
 				FROM ".$this->studentTable." as s
 				LEFT JOIN ".$this->attendanceTable." as a ON s.id = a.student_id
-				WHERE a.class_id = '".$this->classId."' AND (a.attendance_date BETWEEN '".$this->attendanceDate."' AND '".$this->attendanceDate_b."') ";
+				WHERE s.class = '".$this->classId."' AND (a.attendance_date BETWEEN '".$this->attendanceDate."' AND '".$this->attendanceDate_b."') ";
 			if(!empty($_POST["search"]["value"])){
 				$sqlQuery .= ' AND (s.id LIKE "%'.$_POST["search"]["value"].'%" ';
 				$sqlQuery .= ' OR s.name LIKE "%'.$_POST["search"]["value"].'%" ';
@@ -366,7 +316,10 @@ WHERE class=".$this->classId."
 			$stmt->execute();
 			$result = $stmt->get_result();	
 						
-			$stmtTotal = $this->conn->prepare("SELECT * FROM ".$this->attendanceTable);
+			$stmtTotal = $this->conn->prepare("SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
+				FROM ".$this->studentTable." as s
+				LEFT JOIN ".$this->attendanceTable." as a ON s.id = a.student_id
+				WHERE s.class = '".$this->classId."'");
 			$stmtTotal->execute();
 			$allResult = $stmtTotal->get_result();
 			$allRecords = $allResult->num_rows;

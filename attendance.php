@@ -95,7 +95,8 @@ display: none;
 								<th>#</th>								
 								<th>Register No</th>	
 								<th>Name</th>
-								<th>Attendance</th>													
+								<th>Attendance</th>
+								<th>status</th>													
 							</tr>
 						</thead>
 					</table>

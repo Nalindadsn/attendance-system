@@ -29,7 +29,7 @@ include('inc/header.php');
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap.min.js"></script>		
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
-<script src="js/assignments.js"></script>	
+<script src="js/attendancea.js"></script>	
 <script src="js/general.js"></script>
 <link href="css/style.css" rel="stylesheet" type="text/css" >  
 <style>
@@ -95,8 +95,7 @@ display: none;
 								<th>#</th>								
 								<th>Register No</th>	
 								<th>Name</th>
-								<th>Attendance</th>
-								<th>status</th>													
+								<th>Attendance</th>													
 							</tr>
 						</thead>
 					</table>

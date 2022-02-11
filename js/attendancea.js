@@ -1,15 +1,24 @@
 $(document).ready(function(){	
 	$('#search').click(function(){
-		$('#studentList').removeClass('hidden');		
+		$('#studentList').removeClass('hidden');
+		$('#saveAttendance').removeClass('hidden');
 		if ($.fn.DataTable.isDataTable("#studentList")) {
 			$('#studentList').DataTable().clear().destroy();
 		}
-		var classid = $('#classid').val();		
-		var attendanceDate = $('#attendanceDate').val();	
-		var attendanceDate_b = $('#attendanceDate_b').val();	
-		console.log(classid)	
+		var classid = $('#country').val();
+		var sId = $('#classId').val();		
+		console.log(classid)
 
-		if(classid && attendanceDate) {			
+
+		if(classid) {
+			$.ajax({
+				url:"attendance_action.php",
+				method:"POST",
+				data:{classid:classid,sId:sId, action:"attendanceStatus"},
+				success:function(data) {			
+					$('#message').text(data).removeClass('hidden');	
+				}
+			})
 			$('#studentList').DataTable({
 				"lengthChange": false,
 				"processing":true,
@@ -18,7 +27,7 @@ $(document).ready(function(){
 				"ajax":{
 					url:"attendance_action.php",
 					type:"POST",				
-					data:{classid:classid, attendanceDate:attendanceDate, attendanceDate_b:attendanceDate_b, action:'getStudentsAttendance'},
+					data:{classid:classid, action:'getStudents'},
 					dataType:"json"
 				},
 				"columnDefs":[
@@ -31,7 +40,32 @@ $(document).ready(function(){
 			});				
 		}
 	});	
+	$("#classid").change(function() {		
+        $('#att_classid').val($(this).val());		
+    });	
+	$("#sectionid").change(function() {
+		$('#att_sectionid').val($(this).val());		
+    });
+
+
+
+	$("#attendanceForm").submit(function(e) {		
+		var formData = $(this).serialize();
+		console.log(formData)
+		$.ajax({
+			url:"attendance_action.php",
+			method:"POST",
+			data:formData,
+			success:function(data){				
+				$('#message').text(data).removeClass('hidden');				
+			}
+		});
+		return false;
+	});	
 });
+
+
+
  $(document).on("change","#country", function(e){
   e.preventDefault();
   var item = $("#country").val();  
@@ -49,9 +83,10 @@ $(document).ready(function(){
         }else{
           $("#c2").html("No Data"); 
         }
+        
         $("#c3").html('-'); 
-        $("#classid").html("<option>-- select  --</option>");
         var stateBody = "";
+          stateBody += "<option>-- select  --</option>";
         for(var key in response)
           {
             stateBody += "<option value="+response[key]['id']+">"+ response[key]['name'] +"</option>";

@@ -16,7 +16,7 @@ $(document).ready(function(){
 				"serverSide":true,
 				"order":[],
 				"ajax":{
-					url:"attendance_action.php",
+					url:"assignments_action.php",
 					type:"POST",				
 					data:{classid:classid, attendanceDate:attendanceDate, attendanceDate_b:attendanceDate_b, action:'getStudentsAttendance'},
 					dataType:"json"

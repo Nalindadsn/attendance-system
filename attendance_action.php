@@ -9,6 +9,7 @@ $student = new Student($db);
 
 if(!empty($_POST['action']) && $_POST['action'] == 'getStudents') {
 	$student->classId = $_POST["classid"];
+	$student->sId = $_POST["sId"];
 	$student->getClassStudents();
 }
 if(!empty($_POST['action']) && $_POST['action'] == 'updateAttendance') {

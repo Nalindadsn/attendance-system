@@ -33,7 +33,7 @@ include('inc/header.php');
 <script src="js/dataTables.bootstrap.min.js"></script>		
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
 
-<script src="js/attendance_report.js"></script>
+<script src="js/assignment_report.js"></script>
 <script src="js/general.js"></script>
 <style>
 .dataTables_filter {
