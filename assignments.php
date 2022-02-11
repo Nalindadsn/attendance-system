@@ -48,7 +48,7 @@ display: none;
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title"><i class="fa fa-search"></i> Select Class For Attendance</h3>
+							<h3 class="box-title"><i class="fa fa-search"></i> Select lecture For Assignment</h3>
 						</div>
 						<form id="form1" action="" method="post" accept-charset="utf-8">
 							<div class="box-body">						
@@ -82,14 +82,25 @@ display: none;
 										<div class="form-group">
 											<label for="exampleInputEmail1">Assignment No</label>
 											
-											<input name="assignmentNo" class="form-control" required>
+											<select name="assignmentNo" id="assignmentNo" class="form-control" required>
+												<option value="1">Assignment 01</option>
+												<option value="2">Assignment 02</option>
+												<option value="3">Assignment 03</option>
+												<option value="4">Assignment 04</option>
+												<option value="5">Assignment 05</option>
+												<option value="6">Assignment 06</option>
+												<option value="7">Assignment 07</option>
+												<option value="8">Assignment 08</option>
+												<option value="9">Assignment 09</option>
+												<option value="10">Assignment 10</option>
+											</select>
 											<span class="text-danger"></span>
 										</div>
 
 										<div class="form-group">
 											<label for="exampleInputEmail1">Remark</label>
 											
-											<input name="remark" class="form-control" required>
+											<input name="remark" id="remark" class="form-control" required>
 											<span class="text-danger"></span>
 										</div>
 

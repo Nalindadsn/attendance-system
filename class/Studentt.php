@@ -283,7 +283,7 @@ $a=$this->ck($student['id'], $this->classId, $this->sId);
 					$attendanceStatus = $value;					
 					if($student_id) {
 						$insertQuery = "INSERT INTO ".$this->attendanceTable."(student_id, class_id, status, attendance_date,assignmentNo,remark) 
-						VALUES ('".$student_id."', '".$_POST["att_classid"]."', '".$attendanceStatus."', '".$attendanceDate."', '".$_POST["assignmentNo"]."', '".$_POST["remark"]."')";
+						VALUES ('".$student_id."', '".$_POST["att_classid"]."', '".$attendanceStatus."', '".$attendanceDate."', '".$_POST["att_assignmentNo"]."', '".$_POST["att_remark"]."')";
 						
 						$stmt = $this->conn->prepare($insertQuery);							
 						$stmt->execute();
