@@ -400,6 +400,79 @@ $a=$this->ck($student['id'], $this->classId, $this->sId);
 			
 		}
 	}
+
+	public function ck($c,$s,$e,$si){
+//public function allDt(){
+			$sqlQuery = "SELECT * FROM `sas_attendance_b` WHERE  student_id='".$si."' AND class_id = '".$c."'";			
+			$stmt = $this->conn->prepare($sqlQuery);
+			$stmt->execute();
+			$result = $stmt->get_result();
+				return $result->num_rows;		
+}
+
+	public function getStudentsAttendance_b(){		
+		if($this->classId) {
+			$sqlQuery = "SELECT s.id, s.name, s.photo, s.gender, s.dob, s.mobile, s.email, s.current_address,s.admission_no, s.roll_no, s.admission_date, s.academic_year, a.status
+				FROM ".$this->studentTable." as s
+				LEFT JOIN ".$this->attendanceTable." as a ON s.id = a.student_id
+				
+				WHERE a.class_id = '".$this->classId."'  ";
+			if(!empty($_POST["search"]["value"])){
+				$sqlQuery .= ' AND (s.id LIKE "%'.$_POST["search"]["value"].'%" ';
+				$sqlQuery .= ' OR s.name LIKE "%'.$_POST["search"]["value"].'%" ';
+				$sqlQuery .= ' OR s.admission_no LIKE "%'.$_POST["search"]["value"].'%" ';	
+				$sqlQuery .= ' OR s.roll_no LIKE "%'.$_POST["search"]["value"].'%" ';	
+				$sqlQuery .= ' OR a.attendance_date LIKE "%'.$_POST["search"]["value"].'%" )';
+			}
+			if(!empty($_POST["order"])){
+				$sqlQuery .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+			} else {
+				$sqlQuery .= 'ORDER BY s.id DESC ';
+			}
+			if($_POST["length"] != -1){
+				$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+			}	
+			
+			
+			$stmt = $this->conn->prepare($sqlQuery);
+			$stmt->execute();
+			$result = $stmt->get_result();	
+						
+			$stmtTotal = $this->conn->prepare("SELECT * FROM ".$this->attendanceTable);
+			$stmtTotal->execute();
+			$allResult = $stmtTotal->get_result();
+			$allRecords = $allResult->num_rows;
+		
+			$displayRecords = $result->num_rows;		
+			
+			$studentData = array();				
+			while ($student = $result->fetch_assoc()) {			
+							
+				$studentRows = array();			
+				$studentRows[] = $student['id'];				
+				$studentRows[] = $student['roll_no'];
+				$studentRows[] = $student['name'];	
+
+				$studentRows[] = '';
+				$studentRows[] = '';
+				$studentRows[] = '';
+				$studentRows[] = '';
+				$studentRows[] = '';
+				$studentRows[] = '';	
+
+				$studentData[] = $studentRows;
+			}
+			
+			$output = array(
+				"draw"	=>	intval($_POST["draw"]),			
+				"iTotalRecords"	=> 	$displayRecords,
+				"iTotalDisplayRecords"	=>  $allRecords,
+				"data"	=> 	$studentData
+			);
+			echo json_encode($output);
+			
+		}
+	}
 	
 	public function getStudentDetails(){		
 		if($this->studentId) {		

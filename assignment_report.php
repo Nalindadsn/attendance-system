@@ -43,20 +43,18 @@ display: none;
 <?php include('inc/container.php');?>
 <div class="container-fluid">	
 	<div class="row home-sections">		
-	<?php include('top_menus.php'); ?>	
+	<?php include('top_menus.php'); ?>
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    
+
     <ul class="nav navbar-nav">
-	<li id="attendance_report"><a href="attendance_report.php">Attendance Report</a></li>	
-	<li class="active" id="assignment_report"><a href="assignment_report.php">Assignment Report</a></li>	
+	<li class="active" ><a href="attendance_report.php">Attendance Report</a></li>	
+	<li id="assignment_report"><a href="assignment_report.php">Assignment Report</a></li>	
 	
     </ul>
   </div>
-</nav>	
-
-
+</nav>		
 	</div> 		
 	<div class="content">
 		<div class="container-fluid">			
@@ -92,7 +90,18 @@ display: none;
 											<span class="text-danger"></span>
 										</div>
 									</div>									
-																
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="attendanceDate">Attendance Date</label><small class="req"> *</small>
+											<input type="text" name="attendanceDate" id="attendanceDate" class="form-control" placeholder="yyyy/mm/dd" />											
+										</div>
+									</div> 								
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="attendanceDate_b">Attendance End Date</label><small class="req"> *</small>
+											<input type="text" name="attendanceDate_b" id="attendanceDate_b" class="form-control" placeholder="yyyy/mm/dd" />											
+										</div>
+									</div> 										
 								</div>
 							</div>
 							<div class="box-footer">
@@ -110,7 +119,11 @@ display: none;
 								<th>#</th>								
 								<th>Register No</th>	
 								<th>Name</th>
-								<th>Attendance</th>													
+								<th>Assignment 1</th>	
+								<th>Assignment 2</th>	
+								<th>Assignment 3</th>	
+								<th>Assignment 4</th>	
+								<th>Assignment 5</th>													
 							</tr>
 						</thead>
 					</table>					

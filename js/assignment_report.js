@@ -18,7 +18,7 @@ $(document).ready(function(){
 				"ajax":{
 					url:"assignments_action.php",
 					type:"POST",				
-					data:{classid:classid, attendanceDate:attendanceDate, attendanceDate_b:attendanceDate_b, action:'getStudentsAttendance'},
+					data:{classid:classid, attendanceDate:attendanceDate, attendanceDate_b:attendanceDate_b, action:'getStudentsAttendance_b'},
 					dataType:"json"
 				},
 				"columnDefs":[
