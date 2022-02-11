@@ -62,7 +62,7 @@ display: none;
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title"><i class="fa fa-search"></i> Search Class Attendance Report By Date</h3>
+							<h3 class="box-title"><i class="fa fa-search"></i> Search Class Assignment Report By Date</h3>
 						</div>
 						<form id="form1" action="" method="post" accept-charset="utf-8">
 							<div class="box-body">						
@@ -92,13 +92,13 @@ display: none;
 									</div>									
 									<div class="col-md-4">
 										<div class="form-group">
-											<label for="attendanceDate">Attendance Date</label><small class="req"> *</small>
+											<label for="attendanceDate">Start Date</label><small class="req"> *</small>
 											<input type="text" name="attendanceDate" id="attendanceDate" class="form-control" placeholder="yyyy/mm/dd" />											
 										</div>
 									</div> 								
 									<div class="col-md-4">
 										<div class="form-group">
-											<label for="attendanceDate_b">Attendance End Date</label><small class="req"> *</small>
+											<label for="attendanceDate_b"> End Date</label><small class="req"> *</small>
 											<input type="text" name="attendanceDate_b" id="attendanceDate_b" class="form-control" placeholder="yyyy/mm/dd" />											
 										</div>
 									</div> 										

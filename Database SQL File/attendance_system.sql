@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2022 at 11:11 AM
+-- Generation Time: Feb 11, 2022 at 07:51 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -108,36 +108,30 @@ CREATE TABLE `sas_attendance` (
   `class_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
   `status` enum('present','absent','late','half_day') NOT NULL,
-  `attendance_date` varchar(255) NOT NULL
+  `attendance_date` varchar(255) NOT NULL,
+  `assignmentNo` int(11) NOT NULL,
+  `remark` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sas_attendance`
 --
 
-INSERT INTO `sas_attendance` (`attendance_id`, `student_id`, `class_id`, `subject_id`, `status`, `attendance_date`) VALUES
-(351, 11, 35, 0, 'present', '2022/02/11'),
-(352, 10, 35, 0, 'present', '2022/02/11'),
-(353, 9, 35, 0, 'present', '2022/02/11'),
-(354, 8, 35, 0, 'absent', '2022/02/11'),
-(355, 5, 35, 0, 'present', '2022/02/11'),
-(356, 4, 35, 0, 'absent', '2022/02/11'),
-(357, 3, 35, 0, 'present', '2022/02/11'),
-(358, 2, 35, 0, 'absent', '2022/02/11'),
-(359, 11, 38, 0, 'absent', '2022/02/11'),
-(360, 10, 38, 0, 'absent', '2022/02/11'),
-(361, 9, 38, 0, 'present', '2022/02/11'),
-(362, 8, 38, 0, 'absent', '2022/02/11'),
-(363, 5, 38, 0, 'present', '2022/02/11'),
-(364, 4, 38, 0, 'absent', '2022/02/11'),
-(365, 3, 38, 0, 'late', '2022/02/11'),
-(366, 11, 43, 0, 'present', '2022/02/11'),
-(367, 10, 43, 0, 'absent', '2022/02/11'),
-(368, 9, 43, 0, 'late', '2022/02/11'),
-(369, 8, 43, 0, 'half_day', '2022/02/11'),
-(370, 5, 43, 0, 'late', '2022/02/11'),
-(371, 4, 43, 0, 'absent', '2022/02/11'),
-(372, 3, 43, 0, 'present', '2022/02/11');
+INSERT INTO `sas_attendance` (`attendance_id`, `student_id`, `class_id`, `subject_id`, `status`, `attendance_date`, `assignmentNo`, `remark`) VALUES
+(373, 11, 35, 0, 'absent', '2022/02/11', 0, ''),
+(374, 10, 35, 0, 'absent', '2022/02/11', 0, ''),
+(375, 9, 35, 0, 'absent', '2022/02/11', 0, ''),
+(376, 8, 35, 0, 'present', '2022/02/11', 0, ''),
+(377, 5, 35, 0, 'absent', '2022/02/11', 0, ''),
+(378, 4, 35, 0, 'present', '2022/02/11', 0, ''),
+(379, 3, 35, 0, 'half_day', '2022/02/11', 0, ''),
+(380, 11, 35, 0, 'present', '2022/02/10', 0, ''),
+(381, 10, 35, 0, 'present', '2022/02/10', 0, ''),
+(382, 9, 35, 0, 'absent', '2022/02/10', 0, ''),
+(383, 8, 35, 0, 'absent', '2022/02/10', 0, ''),
+(384, 5, 35, 0, 'late', '2022/02/10', 0, ''),
+(385, 4, 35, 0, 'half_day', '2022/02/10', 0, ''),
+(386, 3, 35, 0, 'half_day', '2022/02/10', 0, '');
 
 -- --------------------------------------------------------
 
@@ -151,8 +145,23 @@ CREATE TABLE `sas_attendance_b` (
   `class_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
   `status` varchar(25) NOT NULL,
-  `attendance_date` varchar(255) NOT NULL
+  `attendance_date` varchar(255) NOT NULL,
+  `assignmentNo` int(11) NOT NULL,
+  `remark` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sas_attendance_b`
+--
+
+INSERT INTO `sas_attendance_b` (`attendance_id`, `student_id`, `class_id`, `subject_id`, `status`, `attendance_date`, `assignmentNo`, `remark`) VALUES
+(43, 11, 35, 0, '55', '2022/02/11', 4, '6'),
+(44, 10, 35, 0, '11', '2022/02/11', 4, '6'),
+(45, 9, 35, 0, '', '2022/02/11', 4, '6'),
+(46, 8, 35, 0, '', '2022/02/11', 4, '6'),
+(47, 5, 35, 0, '', '2022/02/11', 4, '6'),
+(48, 4, 35, 0, '', '2022/02/11', 4, '6'),
+(49, 3, 35, 0, '', '2022/02/11', 4, '6');
 
 -- --------------------------------------------------------
 
@@ -329,13 +338,13 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `sas_attendance`
 --
 ALTER TABLE `sas_attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=373;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=387;
 
 --
 -- AUTO_INCREMENT for table `sas_attendance_b`
 --
 ALTER TABLE `sas_attendance_b`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `sas_classes`

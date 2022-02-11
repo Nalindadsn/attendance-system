@@ -401,14 +401,14 @@ $a=$this->ck($student['id'], $this->classId, $this->sId);
 		}
 	}
 
-	public function ck($c,$s,$e,$si){
-//public function allDt(){
-			$sqlQuery = "SELECT * FROM `sas_attendance_b` WHERE  student_id='".$si."' AND class_id = '".$c."'";			
-			$stmt = $this->conn->prepare($sqlQuery);
-			$stmt->execute();
-			$result = $stmt->get_result();
-				return $result->num_rows;		
-}
+// 	public function ck($c,$s,$e,$si){
+// //public function allDt(){
+// 			$sqlQuery = "SELECT * FROM `sas_attendance_b` WHERE  student_id='".$si."' AND class_id = '".$c."'";			
+// 			$stmt = $this->conn->prepare($sqlQuery);
+// 			$stmt->execute();
+// 			$result = $stmt->get_result();
+// 				return $result->num_rows;		
+// }
 
 	public function getStudentsAttendance_b(){		
 		if($this->classId) {
