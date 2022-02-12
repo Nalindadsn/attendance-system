@@ -182,6 +182,11 @@ WHERE class=".$this->classId."
 			$rows[] = $student['class_name']."-".$student['y']."-".$student['type'];
 $a='';
 $a=$this->ck($student['id'], $this->classId, $this->sId);
+if ($a=='') {
+	$b=0;
+}else{
+	$b=$a;
+}
 
 				// $rows[]=ck();
 
