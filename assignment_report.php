@@ -49,8 +49,8 @@ display: none;
   <div class="container-fluid">
 
     <ul class="nav navbar-nav">
-	<li class="active" ><a href="attendance_report.php">Attendance Report</a></li>	
-	<li id="assignment_report"><a href="assignment_report.php">Assignment Report</a></li>	
+	<li ><a href="attendance_report.php">Attendance Report</a></li>	
+	<li class="active"  id="assignment_report"><a href="assignment_report.php">Assignment Report</a></li>	
 	
     </ul>
   </div>
