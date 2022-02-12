@@ -202,7 +202,7 @@ if ($a=='') {
 
 
 				$rows[] = '
-				<input type="number" id="attendencetype1_'.$student['id'].'"  name="attendencetype_'.$student['id'].'"  value="'.$a.'" />
+				<input type="number" id="attendencetype1_'.$student['id'].'"  name="attendencetype_'.$student['id'].'"  value="'.$b.'" />
 				';
 
 
