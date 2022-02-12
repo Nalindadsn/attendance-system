@@ -100,7 +100,7 @@ display: none;
 											<label for="exampleInputEmail1">Assignment No</label>
 											
 											<select name="assignmentNo" id="assignmentNo" class="form-controll" >
-												<option value="">-select-</option>
+												<!-- <option value="">-select-</option> -->
 												<option value="1">Assignment 01</option>
 												<option value="2">Assignment 02</option>
 												<option value="3">Assignment 03</option>

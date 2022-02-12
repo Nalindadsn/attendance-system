@@ -90,16 +90,16 @@ display: none;
 											<span class="text-danger"></span>
 										</div>
 									</div>									
-									<div class="col-md-4">
+									<div class="col-md-4 hidden">
 										<div class="form-group">
 											<label for="attendanceDate">Start Date</label><small class="req"> *</small>
-											<input type="text" name="attendanceDate" id="attendanceDate" class="form-control" placeholder="yyyy/mm/dd" />											
+											<input type="text" name="attendanceDate" id="attendanceDate" class="form-control" placeholder="yyyy/mm/dd"  value="000/00/00" />											
 										</div>
 									</div> 								
-									<div class="col-md-4">
+									<div class="col-md-4 hidden">
 										<div class="form-group">
 											<label for="attendanceDate_b"> End Date</label><small class="req"> *</small>
-											<input type="text" name="attendanceDate_b" id="attendanceDate_b" class="form-control" placeholder="yyyy/mm/dd" />											
+											<input type="text" name="attendanceDate_b" id="attendanceDate_b" class="form-control" placeholder="yyyy/mm/dd" value="000/00/00" />											
 										</div>
 									</div> 										
 								</div>
