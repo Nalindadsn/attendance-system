@@ -1,6 +1,7 @@
 $(document).ready(function(){	
 	$('#search').click(function(){
 		$('#studentList').removeClass('hidden');
+		$('#topIn').removeClass('hidden');
 		$('#saveAttendance').removeClass('hidden');
 		if ($.fn.DataTable.isDataTable("#studentList")) {
 			$('#studentList').DataTable().clear().destroy();

@@ -89,11 +89,6 @@ class Studentt {
 	}
 public function ck($v,$cl,$ss){
 
-			$attendanceYear = date('Y'); 
-			$attendanceMonth = date('m'); 
-			$attendanceDay = date('d'); 
-			$attendanceDate = $attendanceYear."/".$attendanceMonth."/".$attendanceDay;	
-
 			// $sqlQueryCheck = "SELECT * FROM sas_attendance_b WHERE 
 			
 			// student_id='".$v."' AND attendance_date='".$attendanceDate."'  LIMIT 1";	
@@ -106,7 +101,7 @@ public function ck($v,$cl,$ss){
 			//$attendanceDone = $resultCheck->num_rows;
 
 			$sqlQuery = "SELECT * FROM sas_attendance_b WHERE 
-			student_id='".$v."' AND class_id='".$ss."'  AND attendance_date='".$attendanceDate."'  LIMIT 1";			
+			student_id='".$v."' AND class_id='".$ss."'    LIMIT 1";			
 			$stmt = $this->conn->prepare($sqlQuery);
 			$stmt->execute();
 			$result = $stmt->get_result();
@@ -253,7 +248,7 @@ $a=$this->ck($student['id'], $this->classId, $this->sId);
 		$attendanceDate = $attendanceYear."/".$attendanceMonth."/".$attendanceDay;	
 		
 		$sqlQuery = "SELECT * FROM ".$this->attendanceTable." 
-			WHERE class_id = '".$_POST["att_classid"]."' AND attendance_date = '".$attendanceDate."'";			
+			WHERE class_id = '".$_POST["att_classid"]."'";			
 		
 		$stmt = $this->conn->prepare($sqlQuery);
 		$stmt->execute();
@@ -267,7 +262,7 @@ $a=$this->ck($student['id'], $this->classId, $this->sId);
 					$attendanceStatus = $value;					
 					if($student_id) {
 						$updateQuery = "UPDATE ".$this->attendanceTable." SET status = '".$attendanceStatus."'
-						WHERE student_id = '".$student_id."' AND class_id = '".$_POST["att_classid"]."' AND attendance_date = '".$attendanceDate."'";						
+						WHERE student_id = '".$student_id."' AND class_id = '".$_POST["att_classid"]."'";						
 						
 						$stmt = $this->conn->prepare($updateQuery);							
 						$stmt->execute();
@@ -413,7 +408,7 @@ public function ckk($cl,$v,$t){
 				$user = $result->fetch_assoc();
 				return $user['status'];		
 			} else {
-				return "-";		
+				return "0";		
 			}
 
 	// return $user['status'];
@@ -463,12 +458,11 @@ public function ckk($cl,$v,$t){
 				$studentRows[] = $student['roll_no'];
 				$studentRows[] = $student['name'];	
 				$studentRows[] = $this->ckk($student['class_id'],$student['id'],1);	
+				$studentRows[] = $this->ckk($student['class_id'],$student['id'],2);	
+				$studentRows[] = $this->ckk($student['class_id'],$student['id'],3);	
+				$studentRows[] = $this->ckk($student['class_id'],$student['id'],4);	
 
-				$studentRows[] = '';
-				$studentRows[] = '';
-				$studentRows[] = '';
-				$studentRows[] = '';
-				$studentRows[] = '';	
+				$studentRows[] = ($this->ckk($student['class_id'],$student['id'],1)+$this->ckk($student['class_id'],$student['id'],2)+$this->ckk($student['class_id'],$student['id'],3)+$this->ckk($student['class_id'],$student['id'],4));		
 
 				$studentData[] = $studentRows;
 			}

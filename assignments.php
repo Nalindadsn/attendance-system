@@ -79,30 +79,6 @@ display: none;
 
 
 
-										<div class="form-group">
-											<label for="exampleInputEmail1">Assignment No</label>
-											
-											<select name="assignmentNo" id="assignmentNo" class="form-control" required>
-												<option value="1">Assignment 01</option>
-												<option value="2">Assignment 02</option>
-												<option value="3">Assignment 03</option>
-												<option value="4">Assignment 04</option>
-												<option value="5">Assignment 05</option>
-												<option value="6">Assignment 06</option>
-												<option value="7">Assignment 07</option>
-												<option value="8">Assignment 08</option>
-												<option value="9">Assignment 09</option>
-												<option value="10">Assignment 10</option>
-											</select>
-											<span class="text-danger"></span>
-										</div>
-
-										<div class="form-group">
-											<label for="exampleInputEmail1">Remark</label>
-											
-											<input name="remark" id="remark" class="form-control" required>
-											<span class="text-danger"></span>
-										</div>
 
 									</div>																	
 								</div>
@@ -117,7 +93,31 @@ display: none;
 			<div class="row">					
 				<form id="attendanceForm" method="post">					
 					<div style="color:red;margin-top:20px;" class="hidden" id="message"></div>
-					<button type="submit" id="saveAttendance" name="saveAttendance" value="Save Attendance" style="margin-bottom:10px;" class="btn btn-primary btn-sm  pull-right checkbox-toggle hidden"><i class="fa fa-save"></i> Save Attendance</button> <table id="studentList" class="table table-bordered table-striped hidden">
+					<button type="submit" id="saveAttendance" name="saveAttendance" value="Save Attendance" style="margin-bottom:10px;" class="btn btn-primary btn-sm  pull-right checkbox-toggle hidden"><i class="fa fa-save"></i> Save Attendance</button> 
+
+<div id="topIn" class="hidden">
+										<div class="form-group">
+											<label for="exampleInputEmail1">Assignment No</label>
+											
+											<select name="assignmentNo" id="assignmentNo" class="form-controll" >
+												<option value="">-select-</option>
+												<option value="1">Assignment 01</option>
+												<option value="2">Assignment 02</option>
+												<option value="3">Assignment 03</option>
+												<option value="4">Assignment 04</option>
+											</select>
+											<span class="text-danger"></span>
+										</div>
+
+										<div class="form-group">
+											<label for="exampleInputEmail1">Remark</label>
+											
+											<input name="remark" id="remark" class="form-controll" >
+											<span class="text-danger"></span>
+										</div>
+	
+</div>
+					<table id="studentList" class="table table-bordered table-striped hidden">
 						<thead>
 							<tr>
 								<th>#</th>								
